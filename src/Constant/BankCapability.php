@@ -17,7 +17,7 @@ namespace BridgeSDK\Constant;
 
 class BankCapability
 {
-    const SINGLE_TRANSFER = 'single_transfer';
+    public const SINGLE_TRANSFER = 'single_transfer';
 
-    const SINGLE_PAYMENT = 'single_payment';
+    public const SINGLE_PAYMENT = 'single_payment';
 }

@@ -19,7 +19,6 @@ use Psr\Log\LoggerInterface;
 
 class NullLogger implements LoggerInterface
 {
-
     public function emergency($message, array $context = array())
     {
     }

@@ -18,7 +18,6 @@ namespace BridgeSDK\Model;
 use InvalidArgumentException;
 use JsonSerializable;
 
-
 class Error extends AbstractModel implements JsonSerializable
 {
     /**

@@ -5,10 +5,6 @@ jobs:
     name: PHPUnit
     runs-on: ubuntu-latest
     steps:
-      - name: Get runner ip addresses
-        id: ip
-        uses: haythem/public-ip@v1.2
-        run: echo "${{ steps.ip.outputs.ipv4 }}"
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
@@ -26,7 +22,11 @@ jobs:
       - name: Install dependencies
         run: composer update --ignore-platform-reqs
 
+      - name: Get runner ip addresses
+        id: ip
+        uses: haythem/public-ip@v1.2
+
       - name: Unit tests (PHPUnit)
         env:
           BRIDGE_CLIENT_ID: ${{ secrets.BRIDGE_CLIENT_ID }}
-        run: ./vendor/bin/phpunit .
+        run: echo "${{ steps.ip.outputs.ipv4 }}"; ./vendor/bin/phpunit .
