@@ -6,9 +6,7 @@
     <php>
         <ini name="error_reporting" value="-1" />
         <env name="SYMFONY_DEPRECATIONS_HELPER" value="disabled" />
-        <env name="BRIDGE_CLIENT_ID" value="ece90cb8a48449aa84a3b4b28036798d" />
-        <env name="BRIDGE_CLIENT_SECRET" value="XmxaM1u8fllArqMSPazT1AX5ORh9HGktkEyhFEqnxvOorTmnYPIApvrwxhZaJHIP" />
-    </php>
+            </php>
     <testsuites>
         <testsuite name="bridge">
             <directory suffix=".php">tests</directory>
