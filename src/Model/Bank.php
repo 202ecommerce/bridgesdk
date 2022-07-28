@@ -15,6 +15,8 @@
 
 namespace BridgeSDK\Model;
 
+use InvalidArgumentException;
+
 class Bank extends AbstractModel
 {
     /**
@@ -73,7 +75,7 @@ class Bank extends AbstractModel
     protected $channelType = [];
 
     /**
-     * @var ?string
+     * @var ?int
      */
     protected $displayOrder;
 
@@ -91,8 +93,14 @@ class Bank extends AbstractModel
      */
     public function setId($id)
     {
-        $this->id = $id;
-        return $this;
+        if (is_int($id) === true) {
+            $this->id = $id;
+            return $this;
+        }
+
+        throw new InvalidArgumentException(
+            'Id must be an int, ' . gettype($id) . ' is given.'
+        );
     }
 
     /**
@@ -109,8 +117,14 @@ class Bank extends AbstractModel
      */
     public function setName($name)
     {
-        $this->name = $name;
-        return $this;
+        if (is_string($name) === true) {
+            $this->name = $name;
+            return $this;
+        }
+
+        throw new InvalidArgumentException(
+            'Name must be a string, ' . gettype($name) . ' is given.'
+        );
     }
 
     /**
@@ -127,8 +141,14 @@ class Bank extends AbstractModel
      */
     public function setCountryCode($countryCode)
     {
-        $this->countryCode = $countryCode;
-        return $this;
+        if (is_string($countryCode) === true) {
+            $this->countryCode = $countryCode;
+            return $this;
+        }
+
+        throw new InvalidArgumentException(
+            'Country code must be a string, ' . gettype($countryCode) . ' is given.'
+        );
     }
 
     /**
@@ -145,8 +165,14 @@ class Bank extends AbstractModel
      */
     public function setLogoUrl($logoUrl)
     {
-        $this->logoUrl = $logoUrl;
-        return $this;
+        if (is_string($logoUrl) === true) {
+            $this->logoUrl = $logoUrl;
+            return $this;
+        }
+
+        throw new InvalidArgumentException(
+            'Logo url must be a string, ' . gettype($logoUrl) . ' is given.'
+        );
     }
 
     /**
@@ -158,13 +184,19 @@ class Bank extends AbstractModel
     }
 
     /**
-     * @param bool $isHighlighted
+     * @param bool|null $isHighlighted
      * @return Bank
      */
     public function setIsHighlighted($isHighlighted)
     {
-        $this->isHighlighted = $isHighlighted;
-        return $this;
+        if (is_bool($isHighlighted) === true || is_null($isHighlighted)) {
+            $this->isHighlighted = $isHighlighted;
+            return $this;
+        }
+
+        throw new InvalidArgumentException(
+            'Is highlighted must be a string or null, ' . gettype($isHighlighted) . ' is given.'
+        );
     }
 
     /**
@@ -181,8 +213,14 @@ class Bank extends AbstractModel
      */
     public function setPrimaryColor($primaryColor)
     {
-        $this->primaryColor = $primaryColor;
-        return $this;
+        if (is_string($primaryColor) === true || is_null($primaryColor)) {
+            $this->primaryColor = $primaryColor;
+            return $this;
+        }
+
+        throw new InvalidArgumentException(
+            'Primary color must be a string or null, ' . gettype($primaryColor) . ' is given.'
+        );
     }
 
     /**
@@ -199,8 +237,14 @@ class Bank extends AbstractModel
      */
     public function setSecondaryColor($secondaryColor)
     {
-        $this->secondaryColor = $secondaryColor;
-        return $this;
+        if (is_string($secondaryColor) === true || is_null($secondaryColor)) {
+            $this->secondaryColor = $secondaryColor;
+            return $this;
+        }
+
+        throw new InvalidArgumentException(
+            'Secondary color must be a string or null, ' . gettype($secondaryColor) . ' is given.'
+        );
     }
 
     /**
@@ -217,8 +261,14 @@ class Bank extends AbstractModel
      */
     public function setParentName($parentName)
     {
-        $this->parentName = $parentName;
-        return $this;
+        if (is_string($parentName) === true || is_null($parentName)) {
+            $this->parentName = $parentName;
+            return $this;
+        }
+
+        throw new InvalidArgumentException(
+            'Parent name must be a string or null, ' . gettype($parentName) . ' is given.'
+        );
     }
 
     /**
@@ -235,8 +285,14 @@ class Bank extends AbstractModel
      */
     public function setCapabilities($capabilities)
     {
-        $this->capabilities = $capabilities;
-        return $this;
+        if (is_array($capabilities) === true) {
+            $this->capabilities = $capabilities;
+            return $this;
+        }
+
+        throw new InvalidArgumentException(
+            'Capabilities must be an array, ' . gettype($capabilities) . ' is given.'
+        );
     }
 
     /**
@@ -253,8 +309,14 @@ class Bank extends AbstractModel
      */
     public function setForm($form)
     {
-        $this->form = $form;
-        return $this;
+        if (is_array($form) === true) {
+            $this->form = $form;
+            return $this;
+        }
+
+        throw new InvalidArgumentException(
+            'Form must be an array, ' . gettype($form) . ' is given.'
+        );
     }
 
     /**
@@ -271,12 +333,18 @@ class Bank extends AbstractModel
      */
     public function setChannelType($channelType)
     {
-        $this->channelType = $channelType;
-        return $this;
+        if (is_array($channelType) === true) {
+            $this->channelType = $channelType;
+            return $this;
+        }
+
+        throw new InvalidArgumentException(
+            'Channel type must be an array, ' . gettype($channelType) . ' is given.'
+        );
     }
 
     /**
-     * @return string|null
+     * @return int|null
      */
     public function getDisplayOrder()
     {
@@ -284,12 +352,18 @@ class Bank extends AbstractModel
     }
 
     /**
-     * @param string|null $displayOrder
+     * @param int|null $displayOrder
      * @return Bank
      */
     public function setDisplayOrder($displayOrder)
     {
-        $this->displayOrder = $displayOrder;
-        return $this;
+        if (is_int($displayOrder) === true || is_null($displayOrder)) {
+            $this->displayOrder = $displayOrder;
+            return $this;
+        }
+
+        throw new InvalidArgumentException(
+            'Display order must be an int or null, ' . gettype($displayOrder) . ' is given.'
+        );
     }
 }

@@ -30,4 +30,5 @@ jobs:
         env:
           BRIDGE_CLIENT_ID: ${{ secrets.BRIDGE_CLIENT_ID }}
           BRIDGE_CLIENT_SECRET: ${{ secrets.BRIDGE_CLIENT_SECRET }}
+          BRIDGE_INTEGRATION_TEST: false
         run: ./vendor/bin/phpunit .
