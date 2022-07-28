@@ -36,7 +36,7 @@ class IntegrationTestCase extends TestCase
     protected function setUp(): void
     {
         $integrationTest = getenv('BRIDGE_INTEGRATION_TEST');
-        if (!$integrationTest) {
+        if (empty($integrationTest)) {
             $this->markTestSkipped('Skipping integration test: ' . $this->getName());
         }
     }
