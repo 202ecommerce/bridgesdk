@@ -1,0 +1,32 @@
+name: Unit tests
+on: [ push, pull_request ]
+jobs:
+  phpunit:
+    name: PHPUnit
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get runner ip addresses
+        id: ip
+        uses: haythem/public-ip@v1.2
+        run: echo "${{ steps.ip.outputs.ipv4 }}"
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.1'
+
+      - name: Checkout
+        uses: actions/checkout@v2.0.0
+
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        with:
+          path: vendor
+          key: php-${{ hashFiles('composer.lock') }}
+
+      - name: Install dependencies
+        run: composer update --ignore-platform-reqs
+
+      - name: Unit tests (PHPUnit)
+        env:
+          BRIDGE_CLIENT_ID: ${{ secrets.BRIDGE_CLIENT_ID }}
+        run: ./vendor/bin/phpunit .

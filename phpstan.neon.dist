@@ -1,0 +1,40 @@
+# configuration/phpstan.neon
+includes:
+    # require phpstan/extension-installer to avoid inlcuding these lines
+    #- vendor/ekino/phpstan-banned-code/extension.neon     # https://github.com/ekino/phpstan-banned-code
+    #- vendor/phpstan/phpstan-symfony/extension.neon       # https://github.com/phpstan/phpstan-symfony
+    #- vendor/phpstan/phpstan-deprecation-rules/rules.neon # https://github.com/phpstan/phpstan-deprecation-rules
+    #- vendor/phpstan/phpstan-strict-rules/rules.neon      # https://github.com/phpstan/phpstan-strict-rules
+    #- vendor/phpstan/phpstan/phpstan-doctrine             # https://github.com/phpstan/phpstan-doctrine
+
+parameters:
+    # https://phpstan.org/config-reference#rule-level
+    level: max
+
+    # https://phpstan.org/config-reference#analysed-files
+    # Note that I have put my configuraiton file in the "./configuration" directory
+    # if you have yours at the root of your project remove the "../"
+    paths:
+        - ../src
+        - ../tests
+
+    # https://phpstan.org/config-reference#vague-typehints
+    checkMissingIterableValueType: true
+    checkGenericClassInNonGenericObjectType: false # this parameter is activated at level 6
+    treatPhpDocTypesAsCertain: false
+
+    # It's a special "dev" project, I have to ignore the following warnings because
+    # the use of this functions is intended.
+    # @see https://phpstan.org/user-guide/ignoring-errors
+    ignoreErrors:
+#        - '#Should not use node with type "Expr_Exit", please change the code.#' # warnings for "die()"
+#        - '#Should not use node with type "Stmt_Echo", please change the code.#' # warnings for "echo()"
+#        - '#Should not use function "print_r", please change the code.#'         # warnings for "print_r()"
+#        - '#Should not use function "var_dump", please change the code.#'        # warnings for "var_dump()"
+#        - '#Should not use function "phpinfo", please change the code.#'         # warnings for "phpinfo()"
+#        - '#Variable method call on#'                                            # dev blog!
+
+    # I don't use the Symfony PHPUnit bridge in this project, but if you do, you
+    # probably will have to add the following bootstrap file:
+    bootstrapFiles:
+        - %rootDir%/../../../vendor/autoload.php
