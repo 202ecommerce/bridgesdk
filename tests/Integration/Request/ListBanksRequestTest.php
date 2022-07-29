@@ -17,7 +17,7 @@ namespace Integration\Request;
 
 use BridgeSDK\Client;
 use BridgeSDK\Model\Error;
-use BridgeSDK\Model\ListBanks;
+use BridgeSDK\Model\Bank\ListBanks;
 use BridgeSDK\Request\ListBanksRequest;
 use Tests\Integration\IntegrationTestCase;
 

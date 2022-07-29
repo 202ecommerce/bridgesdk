@@ -17,8 +17,8 @@ namespace BridgeSDK\Response;
 
 use BridgeSDK\Model\AbstractModel;
 use BridgeSDK\Model\ArrayCollection;
+use BridgeSDK\Model\Bank\ListBanks;
 use BridgeSDK\Model\Error;
-use BridgeSDK\Model\ListBanks;
 use InvalidArgumentException;
 
 class ListBanksResponse extends AbstractResponse

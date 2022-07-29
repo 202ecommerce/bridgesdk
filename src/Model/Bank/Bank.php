@@ -13,8 +13,9 @@
  * @link      https://docs.bridgeapi.io/
  */
 
-namespace BridgeSDK\Model;
+namespace BridgeSDK\Model\Bank;
 
+use BridgeSDK\Model\AbstractModel;
 use InvalidArgumentException;
 
 class Bank extends AbstractModel

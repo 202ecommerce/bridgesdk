@@ -1,5 +1,5 @@
 name: Unit tests
-on: [ push, pull_request ]
+on: [ push ]
 jobs:
   phpunit:
     name: PHPUnit
@@ -30,5 +30,5 @@ jobs:
         env:
           BRIDGE_CLIENT_ID: ${{ secrets.BRIDGE_CLIENT_ID }}
           BRIDGE_CLIENT_SECRET: ${{ secrets.BRIDGE_CLIENT_SECRET }}
-          BRIDGE_INTEGRATION_TEST: false
+          BRIDGE_INTEGRATION_TEST: 0
         run: ./vendor/bin/phpunit .

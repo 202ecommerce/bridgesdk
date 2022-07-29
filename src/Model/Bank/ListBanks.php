@@ -13,12 +13,20 @@
  * @link      https://docs.bridgeapi.io/
  */
 
-namespace BridgeSDK\Model;
+namespace BridgeSDK\Model\Bank;
+
+use BridgeSDK\Model\AbstractModel;
 
 class ListBanks extends AbstractModel
 {
+    /**
+     * @var array
+     */
     protected $banks = [];
 
+    /**
+     * @var string
+     */
     private $after = '';
 
     public function hydrate(array $content)

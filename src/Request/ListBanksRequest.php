@@ -45,7 +45,7 @@ class ListBanksRequest extends AbstractRequest
     protected $response = ListBanksResponse::class;
 
     /**
-     * @param $query
+     * @param array $query
      * @return array
      */
     protected function filterQuery($query)

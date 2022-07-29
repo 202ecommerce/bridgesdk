@@ -1,5 +1,5 @@
 name: Coding Standart
-on: [push, pull_request]
+on: [push]
 jobs:
     # Check there is no syntax errors in the project
     php-linter:

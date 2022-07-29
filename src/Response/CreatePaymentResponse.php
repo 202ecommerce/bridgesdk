@@ -15,17 +15,15 @@
 
 namespace BridgeSDK\Response;
 
-use BridgeSDK\Model\AbstractModel;
 use BridgeSDK\Model\ArrayCollection;
-use BridgeSDK\Model\Bank\Bank;
 use BridgeSDK\Model\Error;
+use BridgeSDK\Model\Payment\CreatePaymentUrl;
+use BridgeSDK\Model\Payment\PaymentErrors;
 use InvalidArgumentException;
 
-class BankResponse extends AbstractResponse
+class CreatePaymentResponse extends AbstractResponse
 {
-    /**
-     * @return AbstractModel|ArrayCollection
-     */
+
     public function getModel()
     {
         $content = (string) $this->stream;
@@ -39,13 +37,21 @@ class BankResponse extends AbstractResponse
             );
         }
         if (empty($output) === true) {
-            return new Bank();
+            return new CreatePaymentUrl();
+        }
+
+        if ($this->getStatusCode() == 400) {
+            $errors = (new PaymentErrors())->hydrate($output);
+            if (!is_null($errors)) {
+                return $errors;
+            }
+            return (new Error())->hydrate($output);
         }
 
         if ($this->getStatusCode() < 200 || $this->getStatusCode() > 299) {
             return (new Error())->hydrate($output);
         }
 
-        return (new Bank())->hydrate($output);
+        return (new CreatePaymentUrl())->hydrate($output);
     }
 }

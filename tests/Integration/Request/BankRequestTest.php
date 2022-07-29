@@ -16,7 +16,7 @@
 namespace Tests\Integration\Request;
 
 use BridgeSDK\Client;
-use BridgeSDK\Model\Bank;
+use BridgeSDK\Model\Bank\Bank;
 use BridgeSDK\Model\Error;
 use BridgeSDK\Request\BankRequest;
 use Tests\Integration\IntegrationTestCase;

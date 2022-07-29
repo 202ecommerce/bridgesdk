@@ -16,31 +16,27 @@
 namespace BridgeSDK\Request;
 
 use BridgeSDK\Model\AbstractModel;
-use BridgeSDK\Model\Bank\Bank;
-use BridgeSDK\Response\BankResponse;
+use BridgeSDK\Model\Payment\Payment;
+use BridgeSDK\Response\PaymentResponse;
 use InvalidArgumentException;
 
-class BankRequest extends AbstractRequest
+class PaymentRequest extends AbstractRequest
 {
-    protected $requestTarget = '/banks/:idBank';
+    protected $requestTarget = '/payment-requests/:idPayment';
 
     protected $method = 'GET';
 
-    protected $response = BankResponse::class;
+    protected $response = PaymentResponse::class;
 
-    /**
-     * @param AbstractModel $body
-     * @return AbstractRequest
-     */
     public function setModel(AbstractModel $body)
     {
-        if ($body instanceof Bank) {
-            $this->uri = $this->uri->withPath(str_replace(':idBank', $body->getId(), $this->uri->getPath())) ;
+        if ($body instanceof Payment) {
+            $this->uri = $this->uri->withPath(str_replace(':idPayment', $body->getId(), $this->uri->getPath()));
             return parent::setModel($body);
         }
 
         throw new InvalidArgumentException(
-            'Body must be an instance of ' . Bank::class . ' ' . get_class($body) . ' given.'
+            'Body must be an instance of ' . Payment::class . ' ' . get_class($body) . ' given.'
         );
     }
 }
