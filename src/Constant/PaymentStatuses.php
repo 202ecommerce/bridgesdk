@@ -6,7 +6,7 @@
  * PHP version 5.6+
  *
  * @category  BridgeSDK
- * @package   EcommerceBridgeSDK
+ * @package   Ecommercebridgesdk
  * @author    202-ecommerce <tech@202-ecommerce.com>
  * @copyright 2022 (c) 202-ecommerce
  * @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
@@ -18,8 +18,9 @@ namespace BridgeSDK\Constant;
 class PaymentStatuses
 {
     /**
-     * Status created : CREA, ACTC, ACCP
-     * @var array
+     * Status created : CREA, ACTC, ACCP.
+     *
+     * @var array<string>
      */
     const CREATED_PAYMENTS = [
         'CREA',
@@ -28,8 +29,9 @@ class PaymentStatuses
     ];
 
     /**
-     * Status success : PDNG, ACSP, PART or ACSC
-     * @var array
+     * Status success : PDNG, ACSP, PART or ACSC.
+     *
+     * @var array<string>
      */
     const SUCCESS_PAYMENTS = [
         'PDNG',
@@ -39,8 +41,9 @@ class PaymentStatuses
     ];
 
     /**
-     * Status done : PART or ACSC
-     * @var array
+     * Status done : PART or ACSC.
+     *
+     * @var array<string>
      */
     const DONE_PAYMENTS = [
         'PART',
@@ -48,14 +51,30 @@ class PaymentStatuses
     ];
 
     /**
-     * Status rejected : CANC, RJCT
-     * @var array
+     * Status rejected : CANC, RJCT.
+     *
+     * @var array<string>
      */
     const REJECTED_PAYMENTS = [
         'CANC',
         'RJCT',
     ];
 
+    /**
+     * Status not found (error response).
+     *
+     * @var string
+     */
+    const ERROR_NOT_FOUND = 'errorstatus';
+
+    /**
+     * @var string
+     */
+    const PROCESS_IN_PROGRESS = 'inprogress';
+
+    /**
+     * @return string[]
+     */
     public static function getAllStatuses()
     {
         return array_merge(
@@ -65,12 +84,4 @@ class PaymentStatuses
             self::REJECTED_PAYMENTS
         );
     }
-
-    /**
-     * Status not found (error response)
-     * @var string
-     */
-    const ERROR_NOT_FOUND = 'errorstatus';
-
-    const PROCESS_IN_PROGRESS = 'inprogress';
 }

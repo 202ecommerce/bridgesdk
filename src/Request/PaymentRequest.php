@@ -6,7 +6,7 @@
  * PHP version 5.6+
  *
  * @category  BridgeSDK
- * @package   EcommerceBridgeSDK
+ * @package   Ecommercebridgesdk
  * @author    202-ecommerce <tech@202-ecommerce.com>
  * @copyright 2022 (c) 202-ecommerce
  * @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
@@ -32,11 +32,12 @@ class PaymentRequest extends AbstractRequest
     {
         if ($body instanceof Payment) {
             $this->uri = $this->uri->withPath(str_replace(':idPayment', $body->getId(), $this->uri->getPath()));
+
             return parent::setModel($body);
         }
 
         throw new InvalidArgumentException(
-            'Body must be an instance of ' . Payment::class . ' ' . get_class($body) . ' given.'
+            'Body must be an instance of '.Payment::class.' '.\get_class($body).' given.'
         );
     }
 }

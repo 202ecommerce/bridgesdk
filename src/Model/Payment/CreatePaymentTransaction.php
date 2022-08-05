@@ -6,7 +6,7 @@
  * PHP version 5.6+
  *
  * @category  BridgeSDK
- * @package   EcommerceBridgeSDK
+ * @package   Ecommercebridgesdk
  * @author    202-ecommerce <tech@202-ecommerce.com>
  * @copyright 2022 (c) 202-ecommerce
  * @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
@@ -55,17 +55,19 @@ class CreatePaymentTransaction extends AbstractModel
 
     /**
      * @param string $currency
+     *
      * @return CreatePaymentTransaction
      */
     public function setCurrency($currency)
     {
-        if (is_string($currency) === true) {
+        if (true === \is_string($currency)) {
             $this->currency = $currency;
+
             return $this;
         }
 
         throw new InvalidArgumentException(
-            'Currency must be a string ' . gettype($currency) . ' is given.'
+            'Currency must be a string '.\gettype($currency).' is given.'
         );
     }
 
@@ -79,17 +81,19 @@ class CreatePaymentTransaction extends AbstractModel
 
     /**
      * @param string $label
+     *
      * @return CreatePaymentTransaction
      */
     public function setLabel($label)
     {
-        if (is_string($label) === true) {
+        if (true === \is_string($label)) {
             $this->label = $label;
+
             return $this;
         }
 
         throw new InvalidArgumentException(
-            'Label must be a string ' . gettype($label) . ' is given.'
+            'Label must be a string '.\gettype($label).' is given.'
         );
     }
 
@@ -103,17 +107,19 @@ class CreatePaymentTransaction extends AbstractModel
 
     /**
      * @param float $amount
+     *
      * @return CreatePaymentTransaction
      */
     public function setAmount($amount)
     {
-        if (is_float($amount) === true) {
+        if (true === \is_float($amount)) {
             $this->amount = $amount;
+
             return $this;
         }
 
         throw new InvalidArgumentException(
-            'Amount must be a float ' . gettype($amount) . ' is given.'
+            'Amount must be a float '.\gettype($amount).' is given.'
         );
     }
 
@@ -127,17 +133,19 @@ class CreatePaymentTransaction extends AbstractModel
 
     /**
      * @param string $clientReference
+     *
      * @return CreatePaymentTransaction
      */
     public function setClientReference($clientReference)
     {
-        if (is_string($clientReference) === true) {
+        if (true === \is_string($clientReference)) {
             $this->clientReference = $clientReference;
+
             return $this;
         }
 
         throw new InvalidArgumentException(
-            'Client reference must be a string ' . gettype($clientReference) . ' is given.'
+            'Client reference must be a string '.\gettype($clientReference).' is given.'
         );
     }
 
@@ -151,17 +159,19 @@ class CreatePaymentTransaction extends AbstractModel
 
     /**
      * @param string $endToEndId
+     *
      * @return CreatePaymentTransaction
      */
     public function setEndToEndId($endToEndId)
     {
-        if (is_string($endToEndId) === true) {
+        if (true === \is_string($endToEndId)) {
             $this->endToEndId = $endToEndId;
+
             return $this;
         }
 
         throw new InvalidArgumentException(
-            'End to end id must be a string ' . gettype($endToEndId) . ' is given.'
+            'End to end id must be a string '.\gettype($endToEndId).' is given.'
         );
     }
 }

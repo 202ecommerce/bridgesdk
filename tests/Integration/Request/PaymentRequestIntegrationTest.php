@@ -13,7 +13,7 @@
  * @link      https://docs.bridgeapi.io/
  */
 
-namespace Integration\Request;
+namespace Tests\Integration\Request;
 
 use BridgeSDK\Client;
 use BridgeSDK\Constant\PaymentStatuses;
@@ -21,7 +21,7 @@ use BridgeSDK\Model\Payment\Payment;
 use BridgeSDK\Request\PaymentRequest;
 use Tests\Integration\IntegrationTestCase;
 
-class PaymentRequestTest extends IntegrationTestCase
+class PaymentRequestIntegrationTest extends IntegrationTestCase
 {
     /**
      * @dataProvider getApiCallPaymentOkDataProvider

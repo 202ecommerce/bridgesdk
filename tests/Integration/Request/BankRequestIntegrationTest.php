@@ -21,7 +21,7 @@ use BridgeSDK\Model\Error;
 use BridgeSDK\Request\BankRequest;
 use Tests\Integration\IntegrationTestCase;
 
-class BankRequestTest extends IntegrationTestCase
+class BankRequestIntegrationTest extends IntegrationTestCase
 {
     /**
      * @dataProvider getApiCallBankOkDataProvider

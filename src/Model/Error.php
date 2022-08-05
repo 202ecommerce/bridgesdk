@@ -6,7 +6,7 @@
  * PHP version 5.6+
  *
  * @category  BridgeSDK
- * @package   EcommerceBridgeSDK
+ * @package   Ecommercebridgesdk
  * @author    202-ecommerce <tech@202-ecommerce.com>
  * @copyright 2022 (c) 202-ecommerce
  * @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
@@ -21,22 +21,22 @@ use JsonSerializable;
 class Error extends AbstractModel implements JsonSerializable
 {
     /**
-     * @var string|null
+     * @var null|string
      */
     private $type;
 
     /**
-     * @var string|null
+     * @var null|string
      */
     private $message;
 
     /**
-     * @var string|null
+     * @var null|string
      */
     private $documentationUrl;
 
     /**
-     * @return string|null
+     * @return null|string
      */
     public function getType()
     {
@@ -44,23 +44,25 @@ class Error extends AbstractModel implements JsonSerializable
     }
 
     /**
-     * @param string|null $type
+     * @param null|string $type
+     *
      * @return Error
      */
     public function setType($type)
     {
-        if (is_string($type) === true || is_null($type) === true) {
+        if (true === \is_string($type) || (null === $type) === true) {
             $this->type = $type;
+
             return $this;
         }
 
         throw new InvalidArgumentException(
-            'Type must be a string or null but ' . gettype($type) . ' is given.'
+            'Type must be a string or null but '.\gettype($type).' is given.'
         );
     }
 
     /**
-     * @return string|null
+     * @return null|string
      */
     public function getMessage()
     {
@@ -68,23 +70,25 @@ class Error extends AbstractModel implements JsonSerializable
     }
 
     /**
-     * @param string|null $message
+     * @param null|string $message
+     *
      * @return Error
      */
     public function setMessage($message)
     {
-        if (is_string($message) === true || is_null($message) === true) {
+        if (true === \is_string($message) || (null === $message) === true) {
             $this->message = $message;
+
             return $this;
         }
 
         throw new InvalidArgumentException(
-            'Message must be a string or null but ' . gettype($message) . ' is given.'
+            'Message must be a string or null but '.\gettype($message).' is given.'
         );
     }
 
     /**
-     * @return string|null
+     * @return null|string
      */
     public function getDocumentationUrl()
     {
@@ -92,18 +96,20 @@ class Error extends AbstractModel implements JsonSerializable
     }
 
     /**
-     * @param string|null $documentationUrl
+     * @param null|string $documentationUrl
+     *
      * @return Error
      */
     public function setDocumentationUrl($documentationUrl)
     {
-        if (is_string($documentationUrl) === true || is_null($documentationUrl) === true) {
+        if (true === \is_string($documentationUrl) || (null === $documentationUrl) === true) {
             $this->documentationUrl = $documentationUrl;
+
             return $this;
         }
 
         throw new InvalidArgumentException(
-            'Documentation url must be a string or null but ' . gettype($documentationUrl) . ' is given.'
+            'Documentation url must be a string or null but '.\gettype($documentationUrl).' is given.'
         );
     }
 }

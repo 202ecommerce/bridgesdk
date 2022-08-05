@@ -6,7 +6,7 @@
  * PHP version 5.6+
  *
  * @category  BridgeSDK
- * @package   EcommerceBridgeSDK
+ * @package   Ecommercebridgesdk
  * @author    202-ecommerce <tech@202-ecommerce.com>
  * @copyright 2022 (c) 202-ecommerce
  * @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
@@ -29,18 +29,18 @@ class BankRequest extends AbstractRequest
     protected $response = BankResponse::class;
 
     /**
-     * @param AbstractModel $body
      * @return AbstractRequest
      */
     public function setModel(AbstractModel $body)
     {
         if ($body instanceof Bank) {
-            $this->uri = $this->uri->withPath(str_replace(':idBank', $body->getId(), $this->uri->getPath())) ;
+            $this->uri = $this->uri->withPath(str_replace(':idBank', (string) $body->getId(), $this->uri->getPath()));
+
             return parent::setModel($body);
         }
 
         throw new InvalidArgumentException(
-            'Body must be an instance of ' . Bank::class . ' ' . get_class($body) . ' given.'
+            'Body must be an instance of '.Bank::class.' '.\get_class($body).' given.'
         );
     }
 }

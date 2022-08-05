@@ -6,7 +6,7 @@
  * PHP version 5.6+
  *
  * @category  BridgeSDK
- * @package   EcommerceBridgeSDK
+ * @package   Ecommercebridgesdk
  * @author    202-ecommerce <tech@202-ecommerce.com>
  * @copyright 2022 (c) 202-ecommerce
  * @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
@@ -16,7 +16,6 @@
 namespace BridgeSDK\Model\Payment;
 
 use BridgeSDK\Model\AbstractModel;
-use BridgeSDK\Model\ArrayCollection;
 use InvalidArgumentException;
 
 class CreatePayment extends AbstractModel
@@ -56,17 +55,19 @@ class CreatePayment extends AbstractModel
 
     /**
      * @param string $successfulCallbackUrl
+     *
      * @return CreatePayment
      */
     public function setSuccessfulCallbackUrl($successfulCallbackUrl)
     {
-        if (is_string($successfulCallbackUrl) === true) {
+        if (true === \is_string($successfulCallbackUrl)) {
             $this->successfulCallbackUrl = $successfulCallbackUrl;
+
             return $this;
         }
 
         throw new InvalidArgumentException(
-            'Successful callback url must be a string ' . gettype($successfulCallbackUrl) . ' is given.'
+            'Successful callback url must be a string '.\gettype($successfulCallbackUrl).' is given.'
         );
     }
 
@@ -80,17 +81,19 @@ class CreatePayment extends AbstractModel
 
     /**
      * @param string $unsuccessfulCallbackUrl
+     *
      * @return CreatePayment
      */
     public function setUnsuccessfulCallbackUrl($unsuccessfulCallbackUrl)
     {
-        if (is_string($unsuccessfulCallbackUrl) === true) {
+        if (true === \is_string($unsuccessfulCallbackUrl)) {
             $this->unsuccessfulCallbackUrl = $unsuccessfulCallbackUrl;
+
             return $this;
         }
 
         throw new InvalidArgumentException(
-            'Unsuccessful callback url must be a string ' . gettype($unsuccessfulCallbackUrl) . ' is given.'
+            'Unsuccessful callback url must be a string '.\gettype($unsuccessfulCallbackUrl).' is given.'
         );
     }
 
@@ -104,17 +107,19 @@ class CreatePayment extends AbstractModel
 
     /**
      * @param int $bankId
+     *
      * @return CreatePayment
      */
     public function setBankId($bankId)
     {
-        if (is_int($bankId) === true) {
+        if (true === \is_int($bankId)) {
             $this->bankId = $bankId;
+
             return $this;
         }
 
         throw new InvalidArgumentException(
-            'Bank id must be an int ' . gettype($bankId) . ' is given.'
+            'Bank id must be an int '.\gettype($bankId).' is given.'
         );
     }
 
@@ -128,17 +133,19 @@ class CreatePayment extends AbstractModel
 
     /**
      * @param array<CreatePaymentTransaction> $transactions
+     *
      * @return CreatePayment
      */
     public function setTransactions($transactions)
     {
-        if (is_array($transactions)) {
+        if (\is_array($transactions)) {
             $this->transactions = $transactions;
+
             return $this;
         }
 
         throw new InvalidArgumentException(
-            'Transactions must be an array ' . gettype($transactions) . ' is given.'
+            'Transactions must be an array '.\gettype($transactions).' is given.'
         );
     }
 
@@ -152,17 +159,19 @@ class CreatePayment extends AbstractModel
 
     /**
      * @param PaymentUser $user
+     *
      * @return CreatePayment
      */
     public function setUser($user)
     {
         if ($user instanceof PaymentUser) {
             $this->user = $user;
+
             return $this;
         }
 
         throw new InvalidArgumentException(
-            'User must be an ArrayCollection ' . gettype($user) . ' is given.'
+            'User must be an ArrayCollection '.\gettype($user).' is given.'
         );
     }
 

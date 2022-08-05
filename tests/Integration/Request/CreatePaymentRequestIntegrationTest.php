@@ -13,7 +13,7 @@
  * @link      https://docs.bridgeapi.io/
  */
 
-namespace Integration\Request;
+namespace Tests\Integration\Request;
 
 use BridgeSDK\Client;
 use BridgeSDK\Model\Error;
@@ -25,7 +25,7 @@ use BridgeSDK\Model\Payment\PaymentUser;
 use BridgeSDK\Request\CreatePaymentRequest;
 use Tests\Integration\IntegrationTestCase;
 
-class CreatePaymentRequestTest extends IntegrationTestCase
+class CreatePaymentRequestIntegrationTest extends IntegrationTestCase
 {
     public function testApiCallCreatePaymentOk()
     {

@@ -13,7 +13,7 @@
  * @link      https://docs.bridgeapi.io/
  */
 
-namespace Integration\Request;
+namespace Tests\Integration\Request;
 
 use BridgeSDK\Client;
 use BridgeSDK\Model\Error;
@@ -21,7 +21,7 @@ use BridgeSDK\Model\Bank\ListBanks;
 use BridgeSDK\Request\ListBanksRequest;
 use Tests\Integration\IntegrationTestCase;
 
-class ListBanksRequestTest extends IntegrationTestCase
+class ListBanksRequestIntegrationTest extends IntegrationTestCase
 {
     public function testApiCallBanksOk()
     {

@@ -15,8 +15,7 @@ parameters:
     # Note that I have put my configuraiton file in the "./configuration" directory
     # if you have yours at the root of your project remove the "../"
     paths:
-        - ../src
-        - ../tests
+        - ./src
 
     # https://phpstan.org/config-reference#vague-typehints
     checkMissingIterableValueType: true
@@ -27,6 +26,7 @@ parameters:
     # the use of this functions is intended.
     # @see https://phpstan.org/user-guide/ignoring-errors
     ignoreErrors:
+         - '#Property BridgeSDK\\Client::\$ch has unknown class CurlHandle as its type\.#'
 #        - '#Should not use node with type "Expr_Exit", please change the code.#' # warnings for "die()"
 #        - '#Should not use node with type "Stmt_Echo", please change the code.#' # warnings for "echo()"
 #        - '#Should not use function "print_r", please change the code.#'         # warnings for "print_r()"

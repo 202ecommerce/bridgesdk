@@ -6,7 +6,7 @@
  * PHP version 5.6+
  *
  * @category  BridgeSDK
- * @package   EcommerceBridgeSDK
+ * @package   Ecommercebridgesdk
  * @author    202-ecommerce <tech@202-ecommerce.com>
  * @copyright 2022 (c) 202-ecommerce
  * @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
@@ -71,11 +71,13 @@ class Payment extends AbstractModel
 
     /**
      * @param string $id
+     *
      * @return Payment
      */
     public function setId($id)
     {
         $this->id = $id;
+
         return $this;
     }
 
@@ -89,11 +91,13 @@ class Payment extends AbstractModel
 
     /**
      * @param string $status
+     *
      * @return Payment
      */
     public function setStatus($status)
     {
         $this->status = $status;
+
         return $this;
     }
 
@@ -107,17 +111,19 @@ class Payment extends AbstractModel
 
     /**
      * @param string $statusReason
+     *
      * @return Payment
      */
     public function setStatusReason($statusReason)
     {
-        if (is_string($statusReason) === true) {
+        if (true === \is_string($statusReason)) {
             $this->statusReason = $statusReason;
+
             return $this;
         }
 
         throw new InvalidArgumentException(
-            'Status reason must be a string ' . gettype($statusReason) . ' is given.'
+            'Status reason must be a string '.\gettype($statusReason).' is given.'
         );
     }
 
@@ -131,17 +137,19 @@ class Payment extends AbstractModel
 
     /**
      * @param int $bankId
+     *
      * @return Payment
      */
     public function setBankId($bankId)
     {
-        if (is_int($bankId) === true) {
+        if (true === \is_int($bankId)) {
             $this->bankId = $bankId;
+
             return $this;
         }
 
         throw new InvalidArgumentException(
-            'Bank id must be an int ' . gettype($bankId) . ' is given.'
+            'Bank id must be an int '.\gettype($bankId).' is given.'
         );
     }
 
@@ -155,17 +163,19 @@ class Payment extends AbstractModel
 
     /**
      * @param string $createdAt
+     *
      * @return Payment
      */
     public function setCreatedAt($createdAt)
     {
-        if (is_string($createdAt) === true) {
+        if (true === \is_string($createdAt)) {
             $this->createdAt = $createdAt;
+
             return $this;
         }
 
         throw new InvalidArgumentException(
-            'Created at must be a string ' . gettype($createdAt) . ' is given.'
+            'Created at must be a string '.\gettype($createdAt).' is given.'
         );
     }
 
@@ -179,17 +189,19 @@ class Payment extends AbstractModel
 
     /**
      * @param string $updatedAt
+     *
      * @return Payment
      */
     public function setUpdatedAt($updatedAt)
     {
-        if (is_string($updatedAt) === true) {
+        if (true === \is_string($updatedAt)) {
             $this->updatedAt = $updatedAt;
+
             return $this;
         }
 
         throw new InvalidArgumentException(
-            'Updated at must be a string ' . gettype($updatedAt) . ' is given.'
+            'Updated at must be a string '.\gettype($updatedAt).' is given.'
         );
     }
 
@@ -203,22 +215,24 @@ class Payment extends AbstractModel
 
     /**
      * @param PaymentUser $user
+     *
      * @return Payment
      */
     public function setUser($user)
     {
         if ($user instanceof PaymentUser) {
             $this->user = $user;
+
             return $this;
         }
 
         throw new InvalidArgumentException(
-            'User must be a string ' . gettype($user) . ' is given.'
+            'User must be a string '.\gettype($user).' is given.'
         );
     }
 
     /**
-     * @return ArrayCollection
+     * @return ArrayCollection<Transaction>
      */
     public function getTransactions()
     {
@@ -226,23 +240,25 @@ class Payment extends AbstractModel
     }
 
     /**
-     * @param ArrayCollection $transactions
+     * @param ArrayCollection<Transaction> $transactions
+     *
      * @return Payment
      */
     public function setTransactions($transactions)
     {
         if ($transactions instanceof ArrayCollection) {
             $this->transactions = $transactions;
+
             return $this;
         }
 
         throw new InvalidArgumentException(
-            'Transactions must be an ArrayCollection ' . gettype($transactions) . ' is given.'
+            'Transactions must be an ArrayCollection '.\gettype($transactions).' is given.'
         );
     }
 
     /**
-     * hydrate from array
+     * hydrate from array.
      *
      * @param array<mixed> $content
      *
@@ -250,25 +266,29 @@ class Payment extends AbstractModel
      */
     public function hydrate(array $content)
     {
-        $setterName = get_class_methods(get_class($this));
+        $setterName = get_class_methods(static::class);
         foreach ($setterName as $value) {
-            if (substr($value, 0, 3) === 'set') {
-                $key = lcfirst(substr($value, 3, strlen($value)));
+            if ('set' === substr($value, 0, 3)) {
+                $key = lcfirst(substr($value, 3, \strlen($value)));
                 $apiKey = $this->transformToPascalCase($key);
                 if (isset($content[$apiKey])) {
                     switch ($key) {
                         case 'user':
-                            $this->$value((new PaymentUser())->hydrate($content[$apiKey]));
+                            $this->{$value}((new PaymentUser())->hydrate($content[$apiKey]));
+
                             break;
+
                         case 'transactions':
                             $collection = new ArrayCollection();
                             foreach ($content[$apiKey] as $transaction) {
                                 $collection->append((new Transaction())->hydrate($transaction));
                             }
                             $this->transactions = $collection;
+
                             break;
+
                         default:
-                            $this->$value($content[$apiKey]);
+                            $this->{$value}($content[$apiKey]);
                     }
                 }
             }

@@ -6,7 +6,7 @@
  * PHP version 5.6+
  *
  * @category  BridgeSDK
- * @package   EcommerceBridgeSDK
+ * @package   Ecommercebridgesdk
  * @author    202-ecommerce <tech@202-ecommerce.com>
  * @copyright 2022 (c) 202-ecommerce
  * @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
@@ -15,30 +15,30 @@
 
 namespace BridgeSDK\Exception;
 
-use RuntimeException;
 use Exception;
 use Psr\Http\Message\RequestInterface;
+use RuntimeException;
 
 /**
- * Request Exception
+ * Request Exception.
  *
  * Failed http request exception class
  */
 class RequestException extends RuntimeException
 {
     /**
-     * Request object
+     * Request object.
      *
      * @var RequestInterface
      */
     private $request;
 
     /**
-     * Create request exception object
+     * Create request exception object.
      *
-     * @param string  $message  Exception message
-     * @param RequestInterface  $request  Request object
-     * @param \Exception|null  $lastException  Previous exception object
+     * @param string           $message       Exception message
+     * @param RequestInterface $request       Request object
+     * @param null|\Exception  $lastException Previous exception object
      */
     public function __construct($message, RequestInterface $request, Exception $lastException = null)
     {
@@ -48,7 +48,7 @@ class RequestException extends RuntimeException
     }
 
     /**
-     * Get the request object
+     * Get the request object.
      *
      * @return RequestInterface
      */

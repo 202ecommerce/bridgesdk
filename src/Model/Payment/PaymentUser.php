@@ -6,7 +6,7 @@
  * PHP version 5.6+
  *
  * @category  BridgeSDK
- * @package   EcommerceBridgeSDK
+ * @package   Ecommercebridgesdk
  * @author    202-ecommerce <tech@202-ecommerce.com>
  * @copyright 2022 (c) 202-ecommerce
  * @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
@@ -50,17 +50,19 @@ class PaymentUser extends AbstractModel
 
     /**
      * @param string $firstName
+     *
      * @return PaymentUser
      */
     public function setFirstName($firstName)
     {
-        if (is_string($firstName) === true) {
+        if (true === \is_string($firstName)) {
             $this->firstName = $firstName;
+
             return $this;
         }
 
         throw new InvalidArgumentException(
-            'First name must be a string ' . gettype($firstName) . ' is given.'
+            'First name must be a string '.\gettype($firstName).' is given.'
         );
     }
 
@@ -74,17 +76,19 @@ class PaymentUser extends AbstractModel
 
     /**
      * @param string $lastName
+     *
      * @return PaymentUser
      */
     public function setLastName($lastName)
     {
-        if (is_string($lastName) === true) {
+        if (true === \is_string($lastName)) {
             $this->lastName = $lastName;
+
             return $this;
         }
 
         throw new InvalidArgumentException(
-            'Last name must be a string ' . gettype($lastName) . ' is given.'
+            'Last name must be a string '.\gettype($lastName).' is given.'
         );
     }
 
@@ -98,17 +102,19 @@ class PaymentUser extends AbstractModel
 
     /**
      * @param string $externalReference
+     *
      * @return PaymentUser
      */
     public function setExternalReference($externalReference)
     {
-        if (is_string($externalReference) === true) {
+        if (true === \is_string($externalReference)) {
             $this->externalReference = $externalReference;
+
             return $this;
         }
 
         throw new InvalidArgumentException(
-            'External reference must be a string ' . gettype($externalReference) . ' is given.'
+            'External reference must be a string '.\gettype($externalReference).' is given.'
         );
     }
 
@@ -122,17 +128,19 @@ class PaymentUser extends AbstractModel
 
     /**
      * @param string $ipAddress
+     *
      * @return PaymentUser
      */
     public function setIpAddress($ipAddress)
     {
-        if (is_string($ipAddress) === true) {
+        if (true === \is_string($ipAddress)) {
             $this->ipAddress = $ipAddress;
+
             return $this;
         }
 
         throw new InvalidArgumentException(
-            'Ip address must be a string ' . gettype($ipAddress) . ' is given.'
+            'Ip address must be a string '.\gettype($ipAddress).' is given.'
         );
     }
 }

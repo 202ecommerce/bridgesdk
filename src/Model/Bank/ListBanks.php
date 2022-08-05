@@ -6,7 +6,7 @@
  * PHP version 5.6+
  *
  * @category  BridgeSDK
- * @package   EcommerceBridgeSDK
+ * @package   Ecommercebridgesdk
  * @author    202-ecommerce <tech@202-ecommerce.com>
  * @copyright 2022 (c) 202-ecommerce
  * @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
@@ -20,7 +20,7 @@ use BridgeSDK\Model\AbstractModel;
 class ListBanks extends AbstractModel
 {
     /**
-     * @var array
+     * @var array<Bank>
      */
     protected $banks = [];
 
@@ -31,11 +31,11 @@ class ListBanks extends AbstractModel
 
     public function hydrate(array $content)
     {
-        if (empty($content['pagination']) === false && empty($content['pagination']['next_uri']) === false) {
+        if (false === empty($content['pagination']) && false === empty($content['pagination']['next_uri'])) {
             $this->after = $this->getAfterParam($content['pagination']['next_uri']);
         }
 
-        if (!empty($content['resources']) && is_array($content['resources'])) {
+        if (!empty($content['resources']) && \is_array($content['resources'])) {
             foreach ($content['resources'] as $resource) {
                 $bank = (new Bank())->hydrate($resource);
                 if (empty($bank)) {
@@ -48,21 +48,8 @@ class ListBanks extends AbstractModel
         return $this;
     }
 
-    protected function getAfterParam($url)
-    {
-        $paramsString = explode('?', $url);
-        $allParams = explode('&', $paramsString[1]);
-        foreach ($allParams as $aParam) {
-            if (strpos($aParam, 'after=') !== false) {
-                return str_replace('after=', '', $aParam);
-            }
-        }
-
-        return '';
-    }
-
     /**
-     * @return array
+     * @return array<Bank>
      */
     public function getBanks()
     {
@@ -70,12 +57,14 @@ class ListBanks extends AbstractModel
     }
 
     /**
-     * @param array $banks
+     * @param array<Bank> $banks
+     *
      * @return ListBanks
      */
     public function setBanks($banks)
     {
         $this->banks = $banks;
+
         return $this;
     }
 
@@ -85,5 +74,23 @@ class ListBanks extends AbstractModel
     public function getAfter()
     {
         return $this->after;
+    }
+
+    /**
+     * @param string $url
+     *
+     * @return array|mixed|string|string[]
+     */
+    protected function getAfterParam($url)
+    {
+        $paramsString = explode('?', $url);
+        $allParams = explode('&', $paramsString[1]);
+        foreach ($allParams as $aParam) {
+            if (str_contains($aParam, 'after=')) {
+                return str_replace('after=', '', $aParam);
+            }
+        }
+
+        return '';
     }
 }

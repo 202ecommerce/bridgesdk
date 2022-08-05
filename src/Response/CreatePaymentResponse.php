@@ -6,7 +6,7 @@
  * PHP version 5.6+
  *
  * @category  BridgeSDK
- * @package   EcommerceBridgeSDK
+ * @package   Ecommercebridgesdk
  * @author    202-ecommerce <tech@202-ecommerce.com>
  * @copyright 2022 (c) 202-ecommerce
  * @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
@@ -23,28 +23,28 @@ use InvalidArgumentException;
 
 class CreatePaymentResponse extends AbstractResponse
 {
-
     public function getModel()
     {
         $content = (string) $this->stream;
-        if (empty($content) === true) {
+        if (true === empty($content)) {
             return new ArrayCollection();
         }
         $output = json_decode($content, true);
         if (JSON_ERROR_NONE !== json_last_error()) {
             throw new InvalidArgumentException(
-                'json_decode error: ' . json_last_error_msg()
+                'json_decode error: '.json_last_error_msg()
             );
         }
-        if (empty($output) === true) {
+        if (true === empty($output)) {
             return new CreatePaymentUrl();
         }
 
-        if ($this->getStatusCode() == 400) {
+        if (400 === $this->getStatusCode()) {
             $errors = (new PaymentErrors())->hydrate($output);
-            if (!is_null($errors)) {
+            if (null !== $errors) {
                 return $errors;
             }
+
             return (new Error())->hydrate($output);
         }
 

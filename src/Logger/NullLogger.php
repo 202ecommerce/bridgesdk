@@ -6,7 +6,7 @@
  * PHP version 5.6+
  *
  * @category  BridgeSDK
- * @package   EcommerceBridgeSDK
+ * @package   Ecommercebridgesdk
  * @author    202-ecommerce <tech@202-ecommerce.com>
  * @copyright 2022 (c) 202-ecommerce
  * @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
@@ -19,39 +19,39 @@ use Psr\Log\LoggerInterface;
 
 class NullLogger implements LoggerInterface
 {
-    public function emergency($message, array $context = array())
+    public function emergency($message, array $context = [])
     {
     }
 
-    public function alert($message, array $context = array())
+    public function alert($message, array $context = [])
     {
     }
 
-    public function critical($message, array $context = array())
+    public function critical($message, array $context = [])
     {
     }
 
-    public function error($message, array $context = array())
+    public function error($message, array $context = [])
     {
     }
 
-    public function warning($message, array $context = array())
+    public function warning($message, array $context = [])
     {
     }
 
-    public function notice($message, array $context = array())
+    public function notice($message, array $context = [])
     {
     }
 
-    public function info($message, array $context = array())
+    public function info($message, array $context = [])
     {
     }
 
-    public function debug($message, array $context = array())
+    public function debug($message, array $context = [])
     {
     }
 
-    public function log($level, $message, array $context = array())
+    public function log($level, $message, array $context = [])
     {
     }
 }

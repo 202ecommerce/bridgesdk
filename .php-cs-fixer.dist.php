@@ -12,28 +12,24 @@ declare(strict_types=1);
  */
 
 $header = <<<'EOF'
-        NOTICE OF LICENSE
+NOTICE OF LICENSE
 
-        This source file is subject to the Open Software License (OSL 3.0)
-        PHP version 5.6+
+This source file is subject to the Open Software License (OSL 3.0)
+PHP version 5.6+
 
-        @category  BridgeSDK
-        @package   Ecommercebridgesdk
-        @author    202-ecommerce <tech@202-ecommerce.com>
-        @copyright 2022 (c) 202-ecommerce
-        @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
-        @link      https://docs.bridgeapi.io/
-    EOF;
+@category  BridgeSDK
+@package   Ecommercebridgesdk
+@author    202-ecommerce <tech@202-ecommerce.com>
+@copyright 2022 (c) 202-ecommerce
+@license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
+@link      https://docs.bridgeapi.io/
+EOF;
 
 $finder = PhpCsFixer\Finder::create()
     ->ignoreDotFiles(false)
     ->ignoreVCSIgnored(true)
-    ->exclude('tests/Fixtures')
+    ->exclude(['tests'])
     ->in(__DIR__)
-    ->append([
-        __DIR__.'/dev-tools/doc.php',
-        // __DIR__.'/php-cs-fixer', disabled, as we want to be able to run bootstrap file even on lower PHP version, to show nice message
-    ])
 ;
 
 $config = new PhpCsFixer\Config();
@@ -46,10 +42,14 @@ $config
         '@PhpCsFixer' => true,
         '@PhpCsFixer:risky' => true,
         'general_phpdoc_annotation_remove' => ['annotations' => ['expectedDeprecation']], // one should use PHPUnit built-in method instead
-        'header_comment' => ['header' => $header],
+        'header_comment' => ['header' => $header, 'separate' => 'bottom', 'comment_type' => 'PHPDoc'],
         'heredoc_indentation' => false, // TODO switch on when # of PR's is lower
         'modernize_strpos' => true, // needs PHP 8+ or polyfill
         'use_arrow_functions' => false, // TODO switch on when # of PR's is lower
+        'visibility_required' => ['elements' => ['property', 'method']],
+        'declare_strict_types' => false,
+        'void_return' => false,
+        'phpdoc_no_empty_return' => false,
     ])
     ->setFinder($finder)
 ;

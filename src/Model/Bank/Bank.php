@@ -6,7 +6,7 @@
  * PHP version 5.6+
  *
  * @category  BridgeSDK
- * @package   EcommerceBridgeSDK
+ * @package   Ecommercebridgesdk
  * @author    202-ecommerce <tech@202-ecommerce.com>
  * @copyright 2022 (c) 202-ecommerce
  * @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
@@ -41,7 +41,7 @@ class Bank extends AbstractModel
     protected $logoUrl;
 
     /**
-     * @var bool
+     * @var null|bool
      */
     protected $isHighlighted;
 
@@ -61,17 +61,17 @@ class Bank extends AbstractModel
     protected $parentName;
 
     /**
-     * @var array
+     * @var array<string>
      */
     protected $capabilities = [];
 
     /**
-     * @var array
+     * @var array<array>
      */
     protected $form = [];
 
     /**
-     * @var array
+     * @var array<string>
      */
     protected $channelType = [];
 
@@ -90,17 +90,19 @@ class Bank extends AbstractModel
 
     /**
      * @param int $id
+     *
      * @return Bank
      */
     public function setId($id)
     {
-        if (is_int($id) === true) {
+        if (true === \is_int($id)) {
             $this->id = $id;
+
             return $this;
         }
 
         throw new InvalidArgumentException(
-            'Id must be an int, ' . gettype($id) . ' is given.'
+            'Id must be an int, '.\gettype($id).' is given.'
         );
     }
 
@@ -114,17 +116,19 @@ class Bank extends AbstractModel
 
     /**
      * @param string $name
+     *
      * @return Bank
      */
     public function setName($name)
     {
-        if (is_string($name) === true) {
+        if (true === \is_string($name)) {
             $this->name = $name;
+
             return $this;
         }
 
         throw new InvalidArgumentException(
-            'Name must be a string, ' . gettype($name) . ' is given.'
+            'Name must be a string, '.\gettype($name).' is given.'
         );
     }
 
@@ -138,17 +142,19 @@ class Bank extends AbstractModel
 
     /**
      * @param string $countryCode
+     *
      * @return Bank
      */
     public function setCountryCode($countryCode)
     {
-        if (is_string($countryCode) === true) {
+        if (true === \is_string($countryCode)) {
             $this->countryCode = $countryCode;
+
             return $this;
         }
 
         throw new InvalidArgumentException(
-            'Country code must be a string, ' . gettype($countryCode) . ' is given.'
+            'Country code must be a string, '.\gettype($countryCode).' is given.'
         );
     }
 
@@ -162,22 +168,24 @@ class Bank extends AbstractModel
 
     /**
      * @param string $logoUrl
+     *
      * @return Bank
      */
     public function setLogoUrl($logoUrl)
     {
-        if (is_string($logoUrl) === true) {
+        if (true === \is_string($logoUrl)) {
             $this->logoUrl = $logoUrl;
+
             return $this;
         }
 
         throw new InvalidArgumentException(
-            'Logo url must be a string, ' . gettype($logoUrl) . ' is given.'
+            'Logo url must be a string, '.\gettype($logoUrl).' is given.'
         );
     }
 
     /**
-     * @return bool
+     * @return null|bool
      */
     public function isHighlighted()
     {
@@ -185,23 +193,25 @@ class Bank extends AbstractModel
     }
 
     /**
-     * @param bool|null $isHighlighted
+     * @param null|bool $isHighlighted
+     *
      * @return Bank
      */
     public function setIsHighlighted($isHighlighted)
     {
-        if (is_bool($isHighlighted) === true || is_null($isHighlighted)) {
+        if (true === \is_bool($isHighlighted) || null === $isHighlighted) {
             $this->isHighlighted = $isHighlighted;
+
             return $this;
         }
 
         throw new InvalidArgumentException(
-            'Is highlighted must be a string or null, ' . gettype($isHighlighted) . ' is given.'
+            'Is highlighted must be a string or null, '.\gettype($isHighlighted).' is given.'
         );
     }
 
     /**
-     * @return string|null
+     * @return null|string
      */
     public function getPrimaryColor()
     {
@@ -209,23 +219,25 @@ class Bank extends AbstractModel
     }
 
     /**
-     * @param string|null $primaryColor
+     * @param null|string $primaryColor
+     *
      * @return Bank
      */
     public function setPrimaryColor($primaryColor)
     {
-        if (is_string($primaryColor) === true || is_null($primaryColor)) {
+        if (true === \is_string($primaryColor) || null === $primaryColor) {
             $this->primaryColor = $primaryColor;
+
             return $this;
         }
 
         throw new InvalidArgumentException(
-            'Primary color must be a string or null, ' . gettype($primaryColor) . ' is given.'
+            'Primary color must be a string or null, '.\gettype($primaryColor).' is given.'
         );
     }
 
     /**
-     * @return string|null
+     * @return null|string
      */
     public function getSecondaryColor()
     {
@@ -233,23 +245,25 @@ class Bank extends AbstractModel
     }
 
     /**
-     * @param string|null $secondaryColor
+     * @param null|string $secondaryColor
+     *
      * @return Bank
      */
     public function setSecondaryColor($secondaryColor)
     {
-        if (is_string($secondaryColor) === true || is_null($secondaryColor)) {
+        if (true === \is_string($secondaryColor) || null === $secondaryColor) {
             $this->secondaryColor = $secondaryColor;
+
             return $this;
         }
 
         throw new InvalidArgumentException(
-            'Secondary color must be a string or null, ' . gettype($secondaryColor) . ' is given.'
+            'Secondary color must be a string or null, '.\gettype($secondaryColor).' is given.'
         );
     }
 
     /**
-     * @return string|null
+     * @return null|string
      */
     public function getParentName()
     {
@@ -257,23 +271,25 @@ class Bank extends AbstractModel
     }
 
     /**
-     * @param string|null $parentName
+     * @param null|string $parentName
+     *
      * @return Bank
      */
     public function setParentName($parentName)
     {
-        if (is_string($parentName) === true || is_null($parentName)) {
+        if (true === \is_string($parentName) || null === $parentName) {
             $this->parentName = $parentName;
+
             return $this;
         }
 
         throw new InvalidArgumentException(
-            'Parent name must be a string or null, ' . gettype($parentName) . ' is given.'
+            'Parent name must be a string or null, '.\gettype($parentName).' is given.'
         );
     }
 
     /**
-     * @return array
+     * @return array<string>
      */
     public function getCapabilities()
     {
@@ -281,23 +297,25 @@ class Bank extends AbstractModel
     }
 
     /**
-     * @param array $capabilities
+     * @param array<string> $capabilities
+     *
      * @return Bank
      */
     public function setCapabilities($capabilities)
     {
-        if (is_array($capabilities) === true) {
+        if (true === \is_array($capabilities)) {
             $this->capabilities = $capabilities;
+
             return $this;
         }
 
         throw new InvalidArgumentException(
-            'Capabilities must be an array, ' . gettype($capabilities) . ' is given.'
+            'Capabilities must be an array, '.\gettype($capabilities).' is given.'
         );
     }
 
     /**
-     * @return array
+     * @return array<array>
      */
     public function getForm()
     {
@@ -305,23 +323,25 @@ class Bank extends AbstractModel
     }
 
     /**
-     * @param array $form
+     * @param array<array> $form
+     *
      * @return Bank
      */
     public function setForm($form)
     {
-        if (is_array($form) === true) {
+        if (true === \is_array($form)) {
             $this->form = $form;
+
             return $this;
         }
 
         throw new InvalidArgumentException(
-            'Form must be an array, ' . gettype($form) . ' is given.'
+            'Form must be an array, '.\gettype($form).' is given.'
         );
     }
 
     /**
-     * @return array
+     * @return array<string>
      */
     public function getChannelType()
     {
@@ -329,23 +349,25 @@ class Bank extends AbstractModel
     }
 
     /**
-     * @param array $channelType
+     * @param array<string> $channelType
+     *
      * @return Bank
      */
     public function setChannelType($channelType)
     {
-        if (is_array($channelType) === true) {
+        if (true === \is_array($channelType)) {
             $this->channelType = $channelType;
+
             return $this;
         }
 
         throw new InvalidArgumentException(
-            'Channel type must be an array, ' . gettype($channelType) . ' is given.'
+            'Channel type must be an array, '.\gettype($channelType).' is given.'
         );
     }
 
     /**
-     * @return int|null
+     * @return null|int
      */
     public function getDisplayOrder()
     {
@@ -353,18 +375,20 @@ class Bank extends AbstractModel
     }
 
     /**
-     * @param int|null $displayOrder
+     * @param null|int $displayOrder
+     *
      * @return Bank
      */
     public function setDisplayOrder($displayOrder)
     {
-        if (is_int($displayOrder) === true || is_null($displayOrder)) {
+        if (true === \is_int($displayOrder) || null === $displayOrder) {
             $this->displayOrder = $displayOrder;
+
             return $this;
         }
 
         throw new InvalidArgumentException(
-            'Display order must be an int or null, ' . gettype($displayOrder) . ' is given.'
+            'Display order must be an int or null, '.\gettype($displayOrder).' is given.'
         );
     }
 }

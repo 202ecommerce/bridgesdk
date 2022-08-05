@@ -13,13 +13,18 @@
  * @link      https://docs.bridgeapi.io/
  */
 
-namespace BridgeSDK\Model;
+namespace BridgeSDK\Constant;
 
-use ArrayObject;
-
-/**
- * ArrayCollection.
- */
-class ArrayCollection extends ArrayObject
+class WebhookIP
 {
+    /**
+     * IP authorized for Bridge WebHooks.
+     *
+     * @var array<string>
+     */
+    const AUTHORIZED_IP = [
+        '63.32.31.5',
+        '52.215.247.62',
+        '34.249.92.209',
+    ];
 }

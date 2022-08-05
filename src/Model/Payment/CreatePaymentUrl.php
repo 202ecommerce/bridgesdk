@@ -6,7 +6,7 @@
  * PHP version 5.6+
  *
  * @category  BridgeSDK
- * @package   EcommerceBridgeSDK
+ * @package   Ecommercebridgesdk
  * @author    202-ecommerce <tech@202-ecommerce.com>
  * @copyright 2022 (c) 202-ecommerce
  * @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
@@ -40,17 +40,19 @@ class CreatePaymentUrl extends AbstractModel
 
     /**
      * @param string $id
+     *
      * @return CreatePaymentUrl
      */
     public function setId($id)
     {
-        if (is_string($id) === true) {
+        if (true === \is_string($id)) {
             $this->id = $id;
+
             return $this;
         }
 
         throw new InvalidArgumentException(
-            'Id must be a string ' . gettype($id) . ' is given.'
+            'Id must be a string '.\gettype($id).' is given.'
         );
     }
 
@@ -64,17 +66,19 @@ class CreatePaymentUrl extends AbstractModel
 
     /**
      * @param string $consentUrl
+     *
      * @return CreatePaymentUrl
      */
     public function setConsentUrl($consentUrl)
     {
-        if (is_string($consentUrl) === true) {
+        if (true === \is_string($consentUrl)) {
             $this->consentUrl = $consentUrl;
+
             return $this;
         }
 
         throw new InvalidArgumentException(
-            'Consent url must be a string ' . gettype($consentUrl) . ' is given.'
+            'Consent url must be a string '.\gettype($consentUrl).' is given.'
         );
     }
 }

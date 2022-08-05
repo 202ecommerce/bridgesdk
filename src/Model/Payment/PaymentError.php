@@ -6,7 +6,7 @@
  * PHP version 5.6+
  *
  * @category  BridgeSDK
- * @package   EcommerceBridgeSDK
+ * @package   Ecommercebridgesdk
  * @author    202-ecommerce <tech@202-ecommerce.com>
  * @copyright 2022 (c) 202-ecommerce
  * @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
@@ -40,17 +40,19 @@ class PaymentError extends AbstractModel
 
     /**
      * @param string $code
+     *
      * @return PaymentError
      */
     public function setCode($code)
     {
-        if (is_string($code) === true) {
+        if (true === \is_string($code)) {
             $this->code = $code;
+
             return $this;
         }
 
         throw new InvalidArgumentException(
-            'Code must be a string ' . gettype($code) . ' is given.'
+            'Code must be a string '.\gettype($code).' is given.'
         );
     }
 
@@ -64,17 +66,19 @@ class PaymentError extends AbstractModel
 
     /**
      * @param string $message
+     *
      * @return PaymentError
      */
     public function setMessage($message)
     {
-        if (is_string($message) === true) {
+        if (true === \is_string($message)) {
             $this->message = $message;
+
             return $this;
         }
 
         throw new InvalidArgumentException(
-            'Message must be a string ' . gettype($message) . ' is given.'
+            'Message must be a string '.\gettype($message).' is given.'
         );
     }
 }
