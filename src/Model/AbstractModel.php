@@ -22,6 +22,7 @@ abstract class AbstractModel implements JsonSerializable
     /**
      * {@inheritdoc}
      */
+    #[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
         $getterName = get_class_methods(static::class);
