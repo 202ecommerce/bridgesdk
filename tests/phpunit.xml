@@ -10,8 +10,6 @@
     <php>
         <ini name="error_reporting" value="-1" />
         <env name="SYMFONY_DEPRECATIONS_HELPER" value="disabled" />
-        <env name="BRIDGE_CLIENT_ID" value="ece90cb8a48449aa84a3b4b28036798d" />
-        <env name="BRIDGE_CLIENT_SECRET" value="iLM7YOPU1cqXL4znTDrE97X5pk0y8iTwIKbkTuLqfbqG9ySWG13JtiJQnfyWG19Z" />
         <env name="BRIDGE_INTEGRATION_TEST" value="true" />
     </php>
     <testsuites>

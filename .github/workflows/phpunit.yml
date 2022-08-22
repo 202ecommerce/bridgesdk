@@ -22,10 +22,6 @@ jobs:
       - name: Install dependencies
         run: composer update --ignore-platform-reqs
 
-      - name: Get runner ip addresses
-        id: ip
-        uses: haythem/public-ip@v1.2
-
       - name: Unit tests (PHPUnit)
         env:
           BRIDGE_CLIENT_ID: ${{ secrets.BRIDGE_CLIENT_ID }}
