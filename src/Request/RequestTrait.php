@@ -6,7 +6,7 @@
  * PHP version 5.6+
  *
  * @category  BridgeSDK
- * @package   EcommerceBridgeSDK
+ * @package   Ecommercebridgesdk
  * @author    202-ecommerce <tech@202-ecommerce.com>
  * @copyright 2022 (c) 202-ecommerce
  * @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
@@ -25,7 +25,7 @@ trait RequestTrait
     /** @var string */
     protected $method;
 
-    /** @var string|null */
+    /** @var null|string */
     protected $requestTarget;
 
     /** @var UriInterface */
@@ -41,7 +41,7 @@ trait RequestTrait
             $target = '/';
         }
         if ('' !== $this->uri->getQuery()) {
-            $target .= '?' . $this->uri->getQuery();
+            $target .= '?'.$this->uri->getQuery();
         }
 
         return $target;
@@ -49,7 +49,7 @@ trait RequestTrait
 
     public function withRequestTarget($requestTarget)
     {
-        if (\preg_match('#\s#', $requestTarget)) {
+        if (preg_match('#\s#', $requestTarget)) {
             throw new \InvalidArgumentException('Invalid request target provided; cannot contain whitespace');
         }
 
@@ -97,7 +97,7 @@ trait RequestTrait
     }
 
     /**
-     * update host from uri
+     * update host from uri.
      *
      * @return void
      */
@@ -108,7 +108,7 @@ trait RequestTrait
         }
 
         if (null !== ($port = $this->uri->getPort())) {
-            $host .= ':' . $port;
+            $host .= ':'.$port;
         }
 
         if (isset($this->headerNames['host'])) {

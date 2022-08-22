@@ -6,7 +6,7 @@
  * PHP version 5.6+
  *
  * @category  BridgeSDK
- * @package   EcommerceBridgeSDK
+ * @package   Ecommercebridgesdk
  * @author    202-ecommerce <tech@202-ecommerce.com>
  * @copyright 2022 (c) 202-ecommerce
  * @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
@@ -22,13 +22,15 @@ abstract class AbstractModel implements JsonSerializable
     /**
      * {@inheritdoc}
      */
+    #[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
-        $getterName = get_class_methods(get_class($this));
+        $getterName = get_class_methods(static::class);
         $gettableAttributes = [];
         foreach ($getterName as $value) {
-            if (substr($value, 0, 3) === 'get') {
-                $gettableAttributes[lcfirst(substr($value, 3, strlen($value)))] = $this->$value();
+            if ('get' === substr($value, 0, 3)) {
+                $key = lcfirst(substr($value, 3, \strlen($value)));
+                $gettableAttributes[$this->transformToPascalCase($key)] = $this->{$value}();
             }
         }
 
@@ -36,21 +38,21 @@ abstract class AbstractModel implements JsonSerializable
     }
 
     /**
-     * hydrate from array
+     * hydrate from array.
      *
      * @param array<mixed> $content
      *
-     * @return self
+     * @return null|static
      */
     public function hydrate(array $content)
     {
-        $setterName = get_class_methods(get_class($this));
+        $setterName = get_class_methods(static::class);
         foreach ($setterName as $value) {
-            if (substr($value, 0, 3) === 'set') {
-                $key = lcfirst(substr($value, 3, strlen($value)));
+            if ('set' === substr($value, 0, 3)) {
+                $key = lcfirst(substr($value, 3, \strlen($value)));
                 $apiKey = $this->transformToPascalCase($key);
                 if (isset($content[$apiKey])) {
-                    $this->$value($content[$apiKey]);
+                    $this->{$value}($content[$apiKey]);
                 }
             }
         }
@@ -58,8 +60,15 @@ abstract class AbstractModel implements JsonSerializable
         return $this;
     }
 
+    /**
+     * @param string $key
+     *
+     * @return string
+     */
     protected function transformToPascalCase($key)
     {
-        return ltrim(strtolower(preg_replace('/[A-Z]([A-Z](?![a-z]))*/', '_$0', $key)), '_');
+        $modifiedKey = (string) preg_replace('/[A-Z]([A-Z](?![a-z]))*/', '_$0', $key);
+
+        return ltrim(strtolower($modifiedKey), '_');
     }
 }

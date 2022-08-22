@@ -6,7 +6,7 @@
  * PHP version 5.6+
  *
  * @category  BridgeSDK
- * @package   EcommerceBridgeSDK
+ * @package   Ecommercebridgesdk
  * @author    202-ecommerce <tech@202-ecommerce.com>
  * @copyright 2022 (c) 202-ecommerce
  * @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
@@ -15,14 +15,14 @@
 
 namespace BridgeSDK\Request;
 
-use JsonSerializable;
-use Psr\Http\Message\RequestInterface;
 use BridgeSDK\Model\AbstractModel;
 use BridgeSDK\Stream;
 use BridgeSDK\Uri\ApiUri;
+use JsonSerializable;
+use Psr\Http\Message\RequestInterface;
 
 /**
- * API client
+ * API client.
  */
 abstract class AbstractRequest implements RequestInterface, JsonSerializable
 {
@@ -30,28 +30,29 @@ abstract class AbstractRequest implements RequestInterface, JsonSerializable
     use RequestTrait;
 
     /**
-     * @var AbstractModel
-     */
-    private $body;
-
-    /**
      * @var string
      */
     protected $response;
 
     /**
-     * @var array
+     * @var array<mixed>
      */
     protected $query = [];
 
     /**
+     * @var AbstractModel
+     */
+    private $body;
+
+    /**
      * @param array<string> $headers Request headers
-     * @param string $version protocol version
+     * @param string        $version protocol version
+     * @param mixed         $query
      */
     public function __construct(array $headers = [], $version = '1.1', $query = [])
     {
         $this->uri = new ApiUri();
-        $this->uri = $this->uri->withPath('/v2' . $this->requestTarget);
+        $this->uri = $this->uri->withPath('/v2'.$this->requestTarget);
         $this->setQuery($query);
 
         if (!empty($this->getQuery())) {
@@ -71,8 +72,7 @@ abstract class AbstractRequest implements RequestInterface, JsonSerializable
     }
 
     /**
-     * Set Body From Model
-     * @param AbstractModel $body
+     * Set Body From Model.
      *
      * @return self
      */
@@ -81,7 +81,7 @@ abstract class AbstractRequest implements RequestInterface, JsonSerializable
         $json = json_encode($body->jsonSerialize(), JSON_PRETTY_PRINT);
         if (JSON_ERROR_NONE !== json_last_error()) {
             throw new \InvalidArgumentException(
-                'json_encode error: ' . json_last_error_msg()
+                'json_encode error: '.json_last_error_msg()
             );
         }
         $new = clone $this;
@@ -91,7 +91,7 @@ abstract class AbstractRequest implements RequestInterface, JsonSerializable
     }
 
     /**
-     * Set Body From Model
+     * Set Body From Model.
      *
      * @return string
      */
@@ -103,13 +103,14 @@ abstract class AbstractRequest implements RequestInterface, JsonSerializable
     /**
      * {@inheritdoc}
      */
+    #[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return get_object_vars($this);
     }
 
     /**
-     * @return array
+     * @return array<mixed>
      */
     public function getQuery()
     {
@@ -117,18 +118,21 @@ abstract class AbstractRequest implements RequestInterface, JsonSerializable
     }
 
     /**
-     * @param array $query
+     * @param array<mixed> $query
+     *
      * @return AbstractRequest
      */
     protected function setQuery($query)
     {
         $this->query = $this->filterQuery(array_merge($this->query, $query));
+
         return $this;
     }
 
     /**
-     * @param array $query
-     * @return array
+     * @param array<mixed> $query
+     *
+     * @return array<mixed>
      */
     protected function filterQuery($query)
     {

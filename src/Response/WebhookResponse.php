@@ -15,17 +15,13 @@
 
 namespace BridgeSDK\Response;
 
-use BridgeSDK\Model\AbstractModel;
 use BridgeSDK\Model\ArrayCollection;
-use BridgeSDK\Model\Bank\ListBanks;
 use BridgeSDK\Model\Error;
+use BridgeSDK\Model\Payment\PaymentWebhook;
 use InvalidArgumentException;
 
-class ListBanksResponse extends AbstractResponse
+class WebhookResponse extends AbstractResponse
 {
-    /**
-     * @return null|AbstractModel|ArrayCollection<AbstractModel>
-     */
     public function getModel()
     {
         $content = (string) $this->stream;
@@ -39,13 +35,13 @@ class ListBanksResponse extends AbstractResponse
             );
         }
         if (true === empty($output)) {
-            return new ListBanks();
+            return new ArrayCollection();
         }
 
         if ($this->getStatusCode() < 200 || $this->getStatusCode() > 299) {
             return (new Error())->hydrate($output);
         }
 
-        return (new ListBanks())->hydrate($output);
+        return (new PaymentWebhook())->hydrate($output);
     }
 }

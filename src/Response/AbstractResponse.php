@@ -6,7 +6,7 @@
  * PHP version 5.6+
  *
  * @category  BridgeSDK
- * @package   EcommerceBridgeSDK
+ * @package   Ecommercebridgesdk
  * @author    202-ecommerce <tech@202-ecommerce.com>
  * @copyright 2022 (c) 202-ecommerce
  * @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
@@ -15,16 +15,16 @@
 
 namespace BridgeSDK\Response;
 
+use BridgeSDK\Model\AbstractModel;
+use BridgeSDK\Model\ArrayCollection;
+use BridgeSDK\Request\MessageTrait;
+use BridgeSDK\Stream;
 use JsonSerializable;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamInterface;
-use BridgeSDK\Model\AbstractModel;
-use BridgeSDK\Request\MessageTrait;
-use BridgeSDK\Model\ArrayCollection;
-use BridgeSDK\Stream;
 
 /**
- * API client
+ * API client.
  */
 abstract class AbstractResponse implements ResponseInterface, JsonSerializable
 {
@@ -34,38 +34,6 @@ abstract class AbstractResponse implements ResponseInterface, JsonSerializable
      * @var AbstractModel
      */
     protected $body;
-
-    /**
-     * Get body
-     *
-     * @return AbstractModel|ArrayCollection<AbstractModel>
-     */
-    abstract public function getModel();
-
-    /**
-     * Gets the body of the message.
-     *
-     * @return StreamInterface|null Returns the body as a stream.
-     */
-    public function getBody()
-    {
-        return $this->stream;
-    }
-
-    /**
-     * Set body
-     *
-     * @param string $body
-     *
-     * @return self
-     */
-    public function setBody($body)
-    {
-        $jsonBody = json_decode($body, true);
-        $this->body = $jsonBody;
-
-        return $this;
-    }
 
     /** @var array<int,string> Map of standard HTTP status code/reason phrases */
     private static $PHRASES = [
@@ -83,11 +51,11 @@ abstract class AbstractResponse implements ResponseInterface, JsonSerializable
     private $statusCode;
 
     /**
-     * @param int $status Status code
-     * @param array<string> $headers Response headers
-     * @param string|resource|StreamInterface|null $body Response body
-     * @param string $version Protocol version
-     * @param string|null $reason Reason phrase (when empty a default will be used based on the status code)
+     * @param int                                  $status  Status code
+     * @param array<string>                        $headers Response headers
+     * @param null|resource|StreamInterface|string $body    Response body
+     * @param string                               $version Protocol version
+     * @param null|string                          $reason  Reason phrase (when empty a default will be used based on the status code)
      */
     public function __construct($status = 200, array $headers = [], $body = null, $version = '1.1', $reason = null)
     {
@@ -108,6 +76,38 @@ abstract class AbstractResponse implements ResponseInterface, JsonSerializable
     }
 
     /**
+     * Get body.
+     *
+     * @return null|AbstractModel|ArrayCollection<AbstractModel>
+     */
+    abstract public function getModel();
+
+    /**
+     * Gets the body of the message.
+     *
+     * @return null|StreamInterface returns the body as a stream
+     */
+    public function getBody()
+    {
+        return $this->stream;
+    }
+
+    /**
+     * Set body.
+     *
+     * @param string $body
+     *
+     * @return self
+     */
+    public function setBody($body)
+    {
+        $jsonBody = json_decode($body, true);
+        $this->body = $jsonBody;
+
+        return $this;
+    }
+
+    /**
      * @inherit
      */
     public function getStatusCode()
@@ -125,17 +125,20 @@ abstract class AbstractResponse implements ResponseInterface, JsonSerializable
 
     /**
      * @inherit
+     *
+     * @param mixed $code
+     * @param mixed $reasonPhrase
      */
     public function withStatus($code, $reasonPhrase = '')
     {
         $code = (int) $code;
         if ($code < 100 || $code > 599) {
-            throw new \InvalidArgumentException(\sprintf('Status code has to be an integer between 100 and 599. A status code of %d was given', $code));
+            throw new \InvalidArgumentException(sprintf('Status code has to be an integer between 100 and 599. A status code of %d was given', $code));
         }
 
         $new = clone $this;
         $new->statusCode = $code;
-        if (empty($reasonPhrase) === true && isset(self::$PHRASES[$new->statusCode])) {
+        if (true === empty($reasonPhrase) && isset(self::$PHRASES[$new->statusCode])) {
             $reasonPhrase = self::$PHRASES[$new->statusCode];
         }
         $new->reasonPhrase = $reasonPhrase;
@@ -146,6 +149,7 @@ abstract class AbstractResponse implements ResponseInterface, JsonSerializable
     /**
      * {@inheritdoc}
      */
+    #[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return get_object_vars($this);

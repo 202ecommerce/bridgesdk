@@ -17,11 +17,11 @@ namespace BridgeSDK\Response;
 
 use BridgeSDK\Model\AbstractModel;
 use BridgeSDK\Model\ArrayCollection;
-use BridgeSDK\Model\Bank\ListBanks;
+use BridgeSDK\Model\Bank\Bank;
 use BridgeSDK\Model\Error;
 use InvalidArgumentException;
 
-class ListBanksResponse extends AbstractResponse
+class BankResponse extends AbstractResponse
 {
     /**
      * @return null|AbstractModel|ArrayCollection<AbstractModel>
@@ -39,13 +39,13 @@ class ListBanksResponse extends AbstractResponse
             );
         }
         if (true === empty($output)) {
-            return new ListBanks();
+            return new Bank();
         }
 
         if ($this->getStatusCode() < 200 || $this->getStatusCode() > 299) {
             return (new Error())->hydrate($output);
         }
 
-        return (new ListBanks())->hydrate($output);
+        return (new Bank())->hydrate($output);
     }
 }

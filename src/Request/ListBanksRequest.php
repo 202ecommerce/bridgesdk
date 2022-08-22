@@ -6,7 +6,7 @@
  * PHP version 5.6+
  *
  * @category  BridgeSDK
- * @package   EcommerceBridgeSDK
+ * @package   Ecommercebridgesdk
  * @author    202-ecommerce <tech@202-ecommerce.com>
  * @copyright 2022 (c) 202-ecommerce
  * @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
@@ -31,7 +31,7 @@ class ListBanksRequest extends AbstractRequest
     protected $method = 'GET';
 
     /**
-     * @var array
+     * @var array<mixed>
      */
     protected $query = [
         'limit' => 500,
@@ -45,12 +45,13 @@ class ListBanksRequest extends AbstractRequest
     protected $response = ListBanksResponse::class;
 
     /**
-     * @param $query
-     * @return array
+     * @param array<mixed> $query
+     *
+     * @return array<mixed>
      */
     protected function filterQuery($query)
     {
-        if ($query['after'] == '') {
+        if ('' === $query['after']) {
             unset($query['after']);
         }
 

@@ -6,7 +6,7 @@
  * PHP version 5.6+
  *
  * @category  BridgeSDK
- * @package   EcommerceBridgeSDK
+ * @package   Ecommercebridgesdk
  * @author    202-ecommerce <tech@202-ecommerce.com>
  * @copyright 2022 (c) 202-ecommerce
  * @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
@@ -18,19 +18,10 @@ namespace BridgeSDK\Uri;
 use Psr\Http\Message\UriInterface;
 
 /**
- * Uri
+ * Uri.
  */
 abstract class AbstractUri implements UriInterface
 {
-    /** @var array<string,int> SCHEMES. */
-    private static $SCHEMES = ['http' => 80, 'https' => 443];
-
-    /** @var string CHAR_UNRESERVED. */
-    private static $CHAR_UNRESERVED = 'a-zA-Z0-9_\-\.~';
-
-    /** @var string CHAR_SUB_DELIMS. */
-    private static $CHAR_SUB_DELIMS = '!\$&\'\(\)\*\+,;=';
-
     /** @var string Uri scheme. */
     protected $scheme = 'https';
 
@@ -52,36 +43,48 @@ abstract class AbstractUri implements UriInterface
     /** @var string Uri fragment. */
     protected $fragment = '';
 
+    /**
+     * @var string
+     */
     protected $version = '';
 
+    /** @var array<string,int> SCHEMES. */
+    private static $SCHEMES = ['http' => 80, 'https' => 443];
+
+    /** @var string CHAR_UNRESERVED. */
+    private static $CHAR_UNRESERVED = 'a-zA-Z0-9_\-\.~';
+
+    /** @var string CHAR_SUB_DELIMS. */
+    private static $CHAR_SUB_DELIMS = '!\$&\'\(\)\*\+,;=';
+
     /**
-     * Constructor
+     * Constructor.
      *
      * @param string $uri uri
      */
     public function __construct($uri = '')
     {
         if ('' !== $uri) {
-            if (false === $parts = \parse_url($uri)) {
-                throw new \InvalidArgumentException(\sprintf('Unable to parse URI: "%s"', $uri));
+            if (false === $parts = parse_url($uri)) {
+                throw new \InvalidArgumentException(sprintf('Unable to parse URI: "%s"', $uri));
             }
 
             // Apply parse_url parts to a URI.
-            $this->scheme = isset($parts['scheme']) ? \strtr($parts['scheme'], 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz') : '';
+            $this->scheme = isset($parts['scheme']) ? strtr($parts['scheme'], 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz') : '';
             $this->userInfo = empty($parts['user']) ? '' : $parts['user'];
-            $this->host = isset($parts['host']) ? \strtr($parts['host'], 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz') : '';
+            $this->host = isset($parts['host']) ? strtr($parts['host'], 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz') : '';
             $this->port = isset($parts['port']) ? $this->filterPort($parts['port']) : null;
             $this->path = isset($parts['path']) ? $this->filterPath($parts['path']) : '';
             $this->query = isset($parts['query']) ? $this->filterQueryAndFragment($parts['query']) : '';
             $this->fragment = isset($parts['fragment']) ? $this->filterQueryAndFragment($parts['fragment']) : '';
             if (isset($parts['pass'])) {
-                $this->userInfo .= ':' . $parts['pass'];
+                $this->userInfo .= ':'.$parts['pass'];
             }
         }
     }
 
     /**
-     * __toString
+     * __toString.
      *
      * @return string
      */
@@ -91,7 +94,7 @@ abstract class AbstractUri implements UriInterface
     }
 
     /**
-     * Get Scheme
+     * Get Scheme.
      *
      * @return string
      */
@@ -111,11 +114,11 @@ abstract class AbstractUri implements UriInterface
 
         $authority = $this->host;
         if ('' !== $this->userInfo) {
-            $authority = $this->userInfo . '@' . $authority;
+            $authority = $this->userInfo.'@'.$authority;
         }
 
         if (null !== $this->port) {
-            $authority .= ':' . $this->port;
+            $authority .= ':'.$this->port;
         }
 
         return $authority;
@@ -171,6 +174,8 @@ abstract class AbstractUri implements UriInterface
 
     /**
      * @inherit
+     *
+     * @param mixed $scheme
      */
     public function withScheme($scheme)
     {
@@ -178,7 +183,7 @@ abstract class AbstractUri implements UriInterface
             throw new \InvalidArgumentException('Scheme must be a string');
         }
 
-        if ($this->scheme === $scheme = \strtr($scheme, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz')) {
+        if ($this->scheme === $scheme = strtr($scheme, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz')) {
             return $this;
         }
 
@@ -191,12 +196,15 @@ abstract class AbstractUri implements UriInterface
 
     /**
      * @inherit
+     *
+     * @param mixed      $user
+     * @param null|mixed $password
      */
     public function withUserInfo($user, $password = null)
     {
         $info = $user;
         if (null !== $password && '' !== $password) {
-            $info .= ':' . $password;
+            $info .= ':'.$password;
         }
 
         if ($this->userInfo === $info) {
@@ -211,6 +219,8 @@ abstract class AbstractUri implements UriInterface
 
     /**
      * @inherit
+     *
+     * @param mixed $host
      */
     public function withHost($host)
     {
@@ -218,7 +228,7 @@ abstract class AbstractUri implements UriInterface
             throw new \InvalidArgumentException('Host must be a string');
         }
 
-        if ($this->host === $host = \strtr($host, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz')) {
+        if ($this->host === $host = strtr($host, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz')) {
             return $this;
         }
 
@@ -230,6 +240,8 @@ abstract class AbstractUri implements UriInterface
 
     /**
      * @inherit
+     *
+     * @param mixed $port
      */
     public function withPort($port)
     {
@@ -245,6 +257,8 @@ abstract class AbstractUri implements UriInterface
 
     /**
      * @inherit
+     *
+     * @param mixed $path
      */
     public function withPath($path)
     {
@@ -260,6 +274,8 @@ abstract class AbstractUri implements UriInterface
 
     /**
      * @inherit
+     *
+     * @param mixed $query
      */
     public function withQuery($query)
     {
@@ -275,6 +291,8 @@ abstract class AbstractUri implements UriInterface
 
     /**
      * @inherit
+     *
+     * @param mixed $fragment
      */
     public function withFragment($fragment)
     {
@@ -289,7 +307,7 @@ abstract class AbstractUri implements UriInterface
     }
 
     /**
-     * create Uri String
+     * create Uri String.
      *
      * @param string $scheme
      * @param string $authority
@@ -303,24 +321,24 @@ abstract class AbstractUri implements UriInterface
     {
         $uri = '';
         if ('' !== $scheme) {
-            $uri .= $scheme . ':';
+            $uri .= $scheme.':';
         }
 
         if ('' !== $authority) {
-            $uri .= '//' . $authority;
+            $uri .= '//'.$authority;
         }
 
         if ('' !== $path) {
             if (!empty($path[0]) && '/' !== $path[0]) {
                 if ('' !== $authority) {
                     // If the path is rootless and an authority is present, the path MUST be prefixed by "/"
-                    $path = '/' . $path;
+                    $path = '/'.$path;
                 }
             } elseif (isset($path[1]) && '/' === $path[1]) {
                 if ('' === $authority) {
                     // If the path is starting with more than one "/" and no authority is present, the
                     // starting slashes MUST be reduced to one.
-                    $path = '/' . \ltrim($path, '/');
+                    $path = '/'.ltrim($path, '/');
                 }
             }
 
@@ -328,20 +346,20 @@ abstract class AbstractUri implements UriInterface
         }
 
         if ('' !== $query) {
-            $uri .= '?' . $query;
+            $uri .= '?'.$query;
         }
 
         if ('' !== $fragment) {
-            $uri .= '#' . $fragment;
+            $uri .= '#'.$fragment;
         }
 
         return $uri;
     }
 
     /**
-     * Validate port
+     * Validate port.
      *
-     * @param string $scheme
+     * @param string   $scheme
      * @param null|int $port
      *
      * @return bool
@@ -352,12 +370,13 @@ abstract class AbstractUri implements UriInterface
     }
 
     /**
-     * Validate port
+     * Validate port.
      *
      * @param null|int $port
      *
-     * @return int|null
      * @throws \InvalidArgumentException
+     *
+     * @return null|int
      */
     protected function filterPort($port)
     {
@@ -366,20 +385,21 @@ abstract class AbstractUri implements UriInterface
         }
 
         $port = (int) $port;
-        if (0 > $port || 0xffff < $port) {
-            throw new \InvalidArgumentException(\sprintf('Invalid port: %d. Must be between 0 and 65535', $port));
+        if (0 > $port || 0xFFFF < $port) {
+            throw new \InvalidArgumentException(sprintf('Invalid port: %d. Must be between 0 and 65535', $port));
         }
 
         return self::isNonStandardPort($this->scheme, $port) ? $port : null;
     }
 
     /**
-     * Validate QueryAndFragment
+     * Validate QueryAndFragment.
      *
      * @param string $path
      *
-     * @return string
      * @throws \InvalidArgumentException
+     *
+     * @return string
      */
     protected function filterPath($path)
     {
@@ -387,16 +407,17 @@ abstract class AbstractUri implements UriInterface
             throw new \InvalidArgumentException('Path must be a string');
         }
 
-        return (string) \preg_replace_callback('/(?:[^' . self::$CHAR_UNRESERVED . self::$CHAR_SUB_DELIMS . '%:@\/]++|%(?![A-Fa-f0-9]{2}))/', [__CLASS__, 'rawurlencodeMatchZero'], $path);
+        return (string) preg_replace_callback('/(?:[^'.self::$CHAR_UNRESERVED.self::$CHAR_SUB_DELIMS.'%:@\/]++|%(?![A-Fa-f0-9]{2}))/', [__CLASS__, 'rawurlencodeMatchZero'], $path);
     }
 
     /**
-     * Validate QueryAndFragment
+     * Validate QueryAndFragment.
      *
      * @param string $str
      *
-     * @return string
      * @throws \InvalidArgumentException
+     *
+     * @return string
      */
     protected function filterQueryAndFragment($str)
     {
@@ -404,11 +425,11 @@ abstract class AbstractUri implements UriInterface
             throw new \InvalidArgumentException('Query and fragment must be a string');
         }
 
-        return (string) \preg_replace_callback('/(?:[^' . self::$CHAR_UNRESERVED . self::$CHAR_SUB_DELIMS . '%:@\/\?]++|%(?![A-Fa-f0-9]{2}))/', [__CLASS__, 'rawurlencodeMatchZero'], $str);
+        return (string) preg_replace_callback('/(?:[^'.self::$CHAR_UNRESERVED.self::$CHAR_SUB_DELIMS.'%:@\/\?]++|%(?![A-Fa-f0-9]{2}))/', [__CLASS__, 'rawurlencodeMatchZero'], $str);
     }
 
     /**
-     * Raw urlencode Match Zero
+     * Raw urlencode Match Zero.
      *
      * @param array<int,string> $match
      *
@@ -416,6 +437,6 @@ abstract class AbstractUri implements UriInterface
      */
     protected static function rawurlencodeMatchZero(array $match)
     {
-        return \rawurlencode($match[0]);
+        return rawurlencode($match[0]);
     }
 }

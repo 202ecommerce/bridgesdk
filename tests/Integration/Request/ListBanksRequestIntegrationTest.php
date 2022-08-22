@@ -13,30 +13,16 @@
  * @link      https://docs.bridgeapi.io/
  */
 
-namespace Tests\Request\Integration;
+namespace Tests\Integration\Request;
 
 use BridgeSDK\Client;
 use BridgeSDK\Model\Error;
-use BridgeSDK\Model\ListBanks;
+use BridgeSDK\Model\Bank\ListBanks;
 use BridgeSDK\Request\ListBanksRequest;
-use PHPUnit\Framework\TestCase;
+use Tests\Integration\IntegrationTestCase;
 
-class ListBanksRequestTest extends TestCase
+class ListBanksRequestIntegrationTest extends IntegrationTestCase
 {
-    protected $clientId;
-
-    protected $clientSecret;
-
-    protected $version;
-
-    public function __construct(?string $name = null, array $data = [], $dataName = '')
-    {
-        parent::__construct($name, $data, $dataName);
-        $this->clientId = getenv('BRIDGE_CLIENT_ID');
-        $this->clientSecret = getenv('BRIDGE_CLIENT_SECRET');
-        $this->version = '2021-06-01';
-    }
-
     public function testApiCallBanksOk()
     {
         $request = new ListBanksRequest();

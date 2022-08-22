@@ -1,14 +1,10 @@
 name: Unit tests
-on: [ push, pull_request ]
+on: [ push ]
 jobs:
   phpunit:
     name: PHPUnit
     runs-on: ubuntu-latest
     steps:
-      - name: Get runner ip addresses
-        id: ip
-        uses: haythem/public-ip@v1.2
-        run: echo "${{ steps.ip.outputs.ipv4 }}"
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
@@ -29,4 +25,6 @@ jobs:
       - name: Unit tests (PHPUnit)
         env:
           BRIDGE_CLIENT_ID: ${{ secrets.BRIDGE_CLIENT_ID }}
+          BRIDGE_CLIENT_SECRET: ${{ secrets.BRIDGE_CLIENT_SECRET }}
+          BRIDGE_INTEGRATION_TEST: 1
         run: ./vendor/bin/phpunit .
