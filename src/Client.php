@@ -341,7 +341,7 @@ class Client
             $clean_data = trim($data);
 
             if ('' !== $clean_data) {
-                if (str_starts_with(strtoupper($clean_data), 'HTTP/')) {
+                if (0 === strpos(strtoupper($clean_data), 'HTTP/')) {
                     $response->setStatus($clean_data)->getResponse();
                 } else {
                     $response->addHeader($clean_data);

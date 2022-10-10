@@ -44,7 +44,6 @@ $config
         'general_phpdoc_annotation_remove' => ['annotations' => ['expectedDeprecation']], // one should use PHPUnit built-in method instead
         'header_comment' => ['header' => $header, 'separate' => 'bottom', 'comment_type' => 'PHPDoc'],
         'heredoc_indentation' => false, // TODO switch on when # of PR's is lower
-        'modernize_strpos' => true, // needs PHP 8+ or polyfill
         'use_arrow_functions' => false, // TODO switch on when # of PR's is lower
         'visibility_required' => ['elements' => ['property', 'method']],
         'declare_strict_types' => false,
