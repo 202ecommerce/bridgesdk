@@ -374,9 +374,9 @@ abstract class AbstractUri implements UriInterface
      *
      * @param null|int $port
      *
-     * @throws \InvalidArgumentException
-     *
      * @return null|int
+     *
+     * @throws \InvalidArgumentException
      */
     protected function filterPort($port)
     {
@@ -397,9 +397,9 @@ abstract class AbstractUri implements UriInterface
      *
      * @param string $path
      *
-     * @throws \InvalidArgumentException
-     *
      * @return string
+     *
+     * @throws \InvalidArgumentException
      */
     protected function filterPath($path)
     {
@@ -415,9 +415,9 @@ abstract class AbstractUri implements UriInterface
      *
      * @param string $str
      *
-     * @throws \InvalidArgumentException
-     *
      * @return string
+     *
+     * @throws \InvalidArgumentException
      */
     protected function filterQueryAndFragment($str)
     {

@@ -56,7 +56,7 @@ class PaymentUser extends AbstractModel
             return $this;
         }
 
-        throw new InvalidArgumentException('First name must be a string ' . \gettype($firstName) . ' is given.');
+        throw new InvalidArgumentException('First name must be a string '.\gettype($firstName).' is given.');
     }
 
     /**
@@ -80,7 +80,7 @@ class PaymentUser extends AbstractModel
             return $this;
         }
 
-        throw new InvalidArgumentException('Last name must be a string ' . \gettype($lastName) . ' is given.');
+        throw new InvalidArgumentException('Last name must be a string '.\gettype($lastName).' is given.');
     }
 
     /**
@@ -104,6 +104,6 @@ class PaymentUser extends AbstractModel
             return $this;
         }
 
-        throw new InvalidArgumentException('Ip address must be a string ' . \gettype($ipAddress) . ' is given.');
+        throw new InvalidArgumentException('Ip address must be a string '.\gettype($ipAddress).' is given.');
     }
 }

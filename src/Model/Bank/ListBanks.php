@@ -83,10 +83,10 @@ class ListBanks extends AbstractModel
      */
     protected function getAfterParam($url)
     {
-        if (empty($url) === true) {
+        if (true === empty($url)) {
             return '';
         }
-        
+
         $paramsString = explode('?', $url);
         $allParams = explode('&', $paramsString[1]);
         foreach ($allParams as $aParam) {

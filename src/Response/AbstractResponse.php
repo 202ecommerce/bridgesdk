@@ -54,11 +54,12 @@ abstract class AbstractResponse implements ResponseInterface, JsonSerializable
     private $statusCode;
 
     /**
-     * @param int $status Status code
+     * @param int           $status  Status code
      * @param array<string> $headers Response headers
-     * @param resource|StreamInterface|string|null body Response body
-     * @param string $version Protocol version
-     * @param string|null $reason Reason phrase (when empty a default will be used based on the status code)
+     * @param null|resource|StreamInterface|string body Response body
+     * @param string      $version Protocol version
+     * @param null|string $reason  Reason phrase (when empty a default will be used based on the status code)
+     * @param null|mixed  $body
      */
     public function __construct($status = 200, array $headers = [], $body = null, $version = '1.1', $reason = null)
     {
@@ -81,18 +82,20 @@ abstract class AbstractResponse implements ResponseInterface, JsonSerializable
     /**
      * Get body.
      *
-     * @return AbstractModel|ArrayCollection<AbstractModel>|null
+     * @return null|AbstractModel|ArrayCollection<AbstractModel>
      */
     abstract public function getModel();
 
     /**
      * Gets the body of the message.
      *
-     * @return StreamInterface|null returns the body as a stream
+     * @param mixed $returnStream
+     *
+     * @return null|StreamInterface returns the body as a stream
      */
     public function getBody($returnStream = true)
     {
-        return $returnStream === true ? $this->stream : $this->body;
+        return true === $returnStream ? $this->stream : $this->body;
     }
 
     /**
@@ -136,6 +139,8 @@ abstract class AbstractResponse implements ResponseInterface, JsonSerializable
 
     /**
      * @inherit
+     *
+     * @param mixed $errors
      */
     public function setError($errors)
     {

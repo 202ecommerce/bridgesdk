@@ -120,7 +120,6 @@ class CreatePaymentRequestIntegrationTest extends IntegrationTestCase
                 (new PaymentUser())
                     ->setFirstName('Unit')
                     ->setLastName('Test')
-                    ->setExternalReference('unit_test')
                     ->setIpAddress('192.168.1.1')
             );
     }

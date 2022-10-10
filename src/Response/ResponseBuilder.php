@@ -66,9 +66,9 @@ class ResponseBuilder
      *
      * @param string $header_line Response header line string
      *
-     * @throws InvalidArgumentException Invalid header line argument
-     *
      * @return static
+     *
+     * @throws InvalidArgumentException Invalid header line argument
      */
     public function addHeader($header_line)
     {
@@ -95,9 +95,9 @@ class ResponseBuilder
      *
      * @param array<string> $headers Array of header lines
      *
-     * @throws InvalidArgumentException Invalid status code argument value
-     *
      * @return self $this
+     *
+     * @throws InvalidArgumentException Invalid status code argument value
      */
     public function setHeadersFromArray(array $headers)
     {
@@ -123,16 +123,16 @@ class ResponseBuilder
      *
      * @param string $statusLine Response status line string
      *
-     * @throws InvalidArgumentException Invalid status line argument
-     *
      * @return self $this
+     *
+     * @throws InvalidArgumentException Invalid status line argument
      */
     public function setStatus($statusLine)
     {
         $statusParts = explode(' ', $statusLine, 3);
         $partsCount = \count($statusParts);
 
-        if ($partsCount < 2 || strpos(strtoupper($statusParts[0]), 'HTTP/') !== 0) {
+        if ($partsCount < 2 || !str_starts_with(strtoupper($statusParts[0]), 'HTTP/')) {
             throw new InvalidArgumentException("'{$statusLine}' is not a valid HTTP status line");
         }
 

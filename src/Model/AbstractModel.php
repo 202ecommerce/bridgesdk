@@ -28,7 +28,7 @@ abstract class AbstractModel implements JsonSerializable
         $getterName = get_class_methods(static::class);
         $gettableAttributes = [];
         foreach ($getterName as $value) {
-            if ('get' === substr($value, 0, 3) && $value !== 'getAfterParam') {
+            if ('get' === substr($value, 0, 3) && 'getAfterParam' !== $value) {
                 $key = lcfirst(substr($value, 3, \strlen($value)));
                 $gettableAttributes[$this->transformToPascalCase($key)] = $this->{$value}();
             }

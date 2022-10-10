@@ -24,7 +24,6 @@ use BridgeSDK\Response\WebhookResponse;
 use InvalidArgumentException;
 use Logger\NullLogger;
 use Psr\Http\Message\RequestInterface;
-use Psr\Http\Message\ResponseInterface;
 use Psr\Log\LoggerInterface;
 use RuntimeException;
 use UnexpectedValueException;
@@ -92,11 +91,11 @@ class Client
     /**
      * Send a PSR-7 Request.
      *
+     * @return AbstractResponse
+     *
      * @throws RequestException         Invalid request
      * @throws InvalidArgumentException Invalid header names and/or values
      * @throws RuntimeException         Failure to create stream
-     *
-     * @return AbstractResponse
      */
     public function sendRequest(AbstractRequest $request)
     {
@@ -164,26 +163,11 @@ class Client
     }
 
     /**
-     * @param AbstractResponse $response
-     * @param array $errors
-     */
-    private function setErrorsOnResponse($response, $errors)
-    {
-        $errorsToSet = [];
-        foreach ($errors as $oneError) {
-            if (isset($oneError['message'])) {
-                $errorsToSet[] = $oneError['message'];
-            }
-        }
-        $response->setError($errorsToSet);
-    }
-
-    /**
      * Retrieve a callback request from API.
      *
-     * @throws RuntimeException Failure to create stream
-     *
      * @return AbstractResponse
+     *
+     * @throws RuntimeException Failure to create stream
      */
     public function retrieveWebhookResponse()
     {
@@ -249,9 +233,9 @@ class Client
      *
      * @param AbstractRequest $request
      *
-     * @throws RuntimeException Failure to create stream
-     *
      * @return ResponseBuilder
+     *
+     * @throws RuntimeException Failure to create stream
      */
     protected function createResponse($request)
     {
@@ -321,11 +305,11 @@ class Client
     /**
      * Create cURL request options.
      *
+     * @return array<mixed> cURL options
+     *
      * @throws RequestException         Invalid request
      * @throws InvalidArgumentException Invalid header names and/or values
      * @throws RuntimeException         Unable to read request body
-     *
-     * @return array<mixed> cURL options
      */
     protected function createOptions(RequestInterface $request, ResponseBuilder $response)
     {
@@ -357,7 +341,7 @@ class Client
             $clean_data = trim($data);
 
             if ('' !== $clean_data) {
-                if (strpos(strtoupper($clean_data), 'HTTP/') === 0) {
+                if (str_starts_with(strtoupper($clean_data), 'HTTP/')) {
                     $response->setStatus($clean_data)->getResponse();
                 } else {
                     $response->addHeader($clean_data);
@@ -370,6 +354,7 @@ class Client
         $options[CURLOPT_WRITEFUNCTION] = function ($ch, $data) use ($response) {
             if (false === empty($response->getResponse()->getBody())) {
                 $response->getResponse()->setBody($data);
+
                 return $response->getResponse()->getBody()->write($data);
             }
 
@@ -439,9 +424,9 @@ class Client
      *
      * @param string $requestProtocolVersion Request http protocol version
      *
-     * @throws UnexpectedValueException Unsupported cURL http protocol version
-     *
      * @return int cURL constant for request http protocol version
+     *
+     * @throws UnexpectedValueException Unsupported cURL http protocol version
      */
     protected function getProtocolVersion($requestProtocolVersion)
     {
@@ -461,5 +446,20 @@ class Client
         }
 
         return CURL_HTTP_VERSION_NONE;
+    }
+
+    /**
+     * @param AbstractResponse $response
+     * @param array            $errors
+     */
+    private function setErrorsOnResponse($response, $errors)
+    {
+        $errorsToSet = [];
+        foreach ($errors as $oneError) {
+            if (isset($oneError['message'])) {
+                $errorsToSet[] = $oneError['message'];
+            }
+        }
+        $response->setError($errorsToSet);
     }
 }
