@@ -353,7 +353,7 @@ class Client
 
         $options[CURLOPT_WRITEFUNCTION] = function ($ch, $data) use ($response) {
             /** @var \Psr\Http\Message\StreamInterface $bodyStreamInterface */
-            $bodyStreamInterface = $response->getResponse()->getBody();      
+            $bodyStreamInterface = $response->getResponse()->getBody();
             $response->getResponse()->setBody($data);
 
             return $bodyStreamInterface->write($data);
@@ -449,7 +449,7 @@ class Client
     /**
      * @param AbstractResponse $response
      * @param mixed            $errors
-     * 
+     *
      * @return void
      */
     private function setErrorsOnResponse($response, $errors)

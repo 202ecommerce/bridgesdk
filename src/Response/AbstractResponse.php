@@ -54,11 +54,11 @@ abstract class AbstractResponse implements ResponseInterface, JsonSerializable
     private $statusCode;
 
     /**
-     * @param int           $status  Status code
-     * @param array<string> $headers Response headers
-     * @param null|resource|StreamInterface|string $body Response body
-     * @param string      $version Protocol version
-     * @param null|string $reason  Reason phrase (when empty a default will be used based on the status code)
+     * @param int                                  $status  Status code
+     * @param array<string>                        $headers Response headers
+     * @param null|resource|StreamInterface|string $body    Response body
+     * @param string                               $version Protocol version
+     * @param null|string                          $reason  Reason phrase (when empty a default will be used based on the status code)
      */
     public function __construct($status = 200, array $headers = [], $body = null, $version = '1.1', $reason = null)
     {
@@ -130,7 +130,7 @@ abstract class AbstractResponse implements ResponseInterface, JsonSerializable
 
     /**
      * @inherit
-     * 
+     *
      * @return mixed
      */
     public function getError()
@@ -142,7 +142,7 @@ abstract class AbstractResponse implements ResponseInterface, JsonSerializable
      * @inherit
      *
      * @param mixed $errors
-     * 
+     *
      * @return self
      */
     public function setError($errors)

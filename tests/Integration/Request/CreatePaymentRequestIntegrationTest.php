@@ -106,8 +106,8 @@ class CreatePaymentRequestIntegrationTest extends IntegrationTestCase
     {
         return (new CreatePayment())
             ->setBankId(6)
-            ->setSuccessfulCallbackUrl('http://prestashop171.denys.tot/?success')
-            ->setUnsuccessfulCallbackUrl('http://prestashop171.denys.tot/?error')
+            ->setSuccessfulCallbackUrl('https://prestashop178.denys.tot/?success')
+            ->setUnsuccessfulCallbackUrl('https://prestashop178.denys.tot/?error')
             ->setTransactions([
                 (new CreatePaymentTransaction())
                     ->setCurrency('EUR')
