@@ -146,12 +146,12 @@ class Client
         $errors = [];
         $result = $response->getResponse();
         $body = $result->getBody(false);
-        if (isset($body['errors'])) {
-            $errors = $body['errors'];
+        if (isset($body->errors)) {
+            $errors = $body->errors;
         }
         $this->setErrorsOnResponse($result, $errors);
 
-        $this->logger->info((string) $result->getBody(), [
+        $this->logger->info((string) json_encode($result->getBody()), [
             'path' => $request->getUri()->getPath(),
             'query' => $request->getUri()->getQuery(),
             'type' => \get_class($result),
@@ -352,13 +352,11 @@ class Client
         };
 
         $options[CURLOPT_WRITEFUNCTION] = function ($ch, $data) use ($response) {
-            if (false === empty($response->getResponse()->getBody())) {
-                $response->getResponse()->setBody($data);
+            /** @var \Psr\Http\Message\StreamInterface $bodyStreamInterface */
+            $bodyStreamInterface = $response->getResponse()->getBody();      
+            $response->getResponse()->setBody($data);
 
-                return $response->getResponse()->getBody()->write($data);
-            }
-
-            return 0;
+            return $bodyStreamInterface->write($data);
         };
 
         return $options;
@@ -450,7 +448,9 @@ class Client
 
     /**
      * @param AbstractResponse $response
-     * @param array            $errors
+     * @param mixed            $errors
+     * 
+     * @return void
      */
     private function setErrorsOnResponse($response, $errors)
     {
