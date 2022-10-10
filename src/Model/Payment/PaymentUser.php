@@ -33,11 +33,6 @@ class PaymentUser extends AbstractModel
     /**
      * @var string
      */
-    private $externalReference;
-
-    /**
-     * @var string
-     */
     private $ipAddress;
 
     /**
@@ -61,9 +56,7 @@ class PaymentUser extends AbstractModel
             return $this;
         }
 
-        throw new InvalidArgumentException(
-            'First name must be a string '.\gettype($firstName).' is given.'
-        );
+        throw new InvalidArgumentException('First name must be a string ' . \gettype($firstName) . ' is given.');
     }
 
     /**
@@ -87,35 +80,7 @@ class PaymentUser extends AbstractModel
             return $this;
         }
 
-        throw new InvalidArgumentException(
-            'Last name must be a string '.\gettype($lastName).' is given.'
-        );
-    }
-
-    /**
-     * @return string
-     */
-    public function getExternalReference()
-    {
-        return $this->externalReference;
-    }
-
-    /**
-     * @param string $externalReference
-     *
-     * @return PaymentUser
-     */
-    public function setExternalReference($externalReference)
-    {
-        if (true === \is_string($externalReference)) {
-            $this->externalReference = $externalReference;
-
-            return $this;
-        }
-
-        throw new InvalidArgumentException(
-            'External reference must be a string '.\gettype($externalReference).' is given.'
-        );
+        throw new InvalidArgumentException('Last name must be a string ' . \gettype($lastName) . ' is given.');
     }
 
     /**
@@ -139,8 +104,6 @@ class PaymentUser extends AbstractModel
             return $this;
         }
 
-        throw new InvalidArgumentException(
-            'Ip address must be a string '.\gettype($ipAddress).' is given.'
-        );
+        throw new InvalidArgumentException('Ip address must be a string ' . \gettype($ipAddress) . ' is given.');
     }
 }

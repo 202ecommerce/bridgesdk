@@ -96,7 +96,7 @@ class Client
      * @throws InvalidArgumentException Invalid header names and/or values
      * @throws RuntimeException         Failure to create stream
      *
-     * @return ResponseInterface
+     * @return AbstractResponse
      */
     public function sendRequest(AbstractRequest $request)
     {
@@ -117,6 +117,7 @@ class Client
         ]);
 
         $response = $this->createResponse($request);
+
         $options = $this->createOptions($request, $response);
         $this->ch = curl_init();
 
@@ -143,16 +144,38 @@ class Client
         }
         curl_close($this->ch);
 
+        $errors = [];
         $result = $response->getResponse();
+        $body = $result->getBody(false);
+        if (isset($body['errors'])) {
+            $errors = $body['errors'];
+        }
+        $this->setErrorsOnResponse($result, $errors);
 
         $this->logger->info((string) $result->getBody(), [
             'path' => $request->getUri()->getPath(),
             'query' => $request->getUri()->getQuery(),
             'type' => \get_class($result),
+            'response' => json_encode($response),
         ]);
 
         // Get the response
         return $result;
+    }
+
+    /**
+     * @param AbstractResponse $response
+     * @param array $errors
+     */
+    private function setErrorsOnResponse($response, $errors)
+    {
+        $errorsToSet = [];
+        foreach ($errors as $oneError) {
+            if (isset($oneError['message'])) {
+                $errorsToSet[] = $oneError['message'];
+            }
+        }
+        $response->setError($errorsToSet);
     }
 
     /**
@@ -334,7 +357,7 @@ class Client
             $clean_data = trim($data);
 
             if ('' !== $clean_data) {
-                if (str_starts_with(strtoupper($clean_data), 'HTTP/')) {
+                if (strpos(strtoupper($clean_data), 'HTTP/') === 0) {
                     $response->setStatus($clean_data)->getResponse();
                 } else {
                     $response->addHeader($clean_data);
@@ -346,6 +369,7 @@ class Client
 
         $options[CURLOPT_WRITEFUNCTION] = function ($ch, $data) use ($response) {
             if (false === empty($response->getResponse()->getBody())) {
+                $response->getResponse()->setBody($data);
                 return $response->getResponse()->getBody()->write($data);
             }
 

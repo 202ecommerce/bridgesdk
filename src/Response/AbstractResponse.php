@@ -47,15 +47,18 @@ abstract class AbstractResponse implements ResponseInterface, JsonSerializable
     /** @var string */
     private $reasonPhrase = '';
 
+    /** @var string[] */
+    private $error = [];
+
     /** @var int */
     private $statusCode;
 
     /**
-     * @param int                                  $status  Status code
-     * @param array<string>                        $headers Response headers
-     * @param null|resource|StreamInterface|string $body    Response body
-     * @param string                               $version Protocol version
-     * @param null|string                          $reason  Reason phrase (when empty a default will be used based on the status code)
+     * @param int $status Status code
+     * @param array<string> $headers Response headers
+     * @param resource|StreamInterface|string|null body Response body
+     * @param string $version Protocol version
+     * @param string|null $reason Reason phrase (when empty a default will be used based on the status code)
      */
     public function __construct($status = 200, array $headers = [], $body = null, $version = '1.1', $reason = null)
     {
@@ -78,18 +81,18 @@ abstract class AbstractResponse implements ResponseInterface, JsonSerializable
     /**
      * Get body.
      *
-     * @return null|AbstractModel|ArrayCollection<AbstractModel>
+     * @return AbstractModel|ArrayCollection<AbstractModel>|null
      */
     abstract public function getModel();
 
     /**
      * Gets the body of the message.
      *
-     * @return null|StreamInterface returns the body as a stream
+     * @return StreamInterface|null returns the body as a stream
      */
-    public function getBody()
+    public function getBody($returnStream = true)
     {
-        return $this->stream;
+        return $returnStream === true ? $this->stream : $this->body;
     }
 
     /**
@@ -121,6 +124,22 @@ abstract class AbstractResponse implements ResponseInterface, JsonSerializable
     public function getReasonPhrase()
     {
         return $this->reasonPhrase;
+    }
+
+    /**
+     * @inherit
+     */
+    public function getError()
+    {
+        return $this->error;
+    }
+
+    /**
+     * @inherit
+     */
+    public function setError($errors)
+    {
+        $this->error = $errors;
     }
 
     /**

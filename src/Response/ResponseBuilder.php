@@ -132,7 +132,7 @@ class ResponseBuilder
         $statusParts = explode(' ', $statusLine, 3);
         $partsCount = \count($statusParts);
 
-        if ($partsCount < 2 || !str_starts_with(strtoupper($statusParts[0]), 'HTTP/')) {
+        if ($partsCount < 2 || strpos(strtoupper($statusParts[0]), 'HTTP/') !== 0) {
             throw new InvalidArgumentException("'{$statusLine}' is not a valid HTTP status line");
         }
 
