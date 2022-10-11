@@ -456,8 +456,8 @@ class Client
     {
         $errorsToSet = [];
         foreach ($errors as $oneError) {
-            if (isset($oneError['message'])) {
-                $errorsToSet[] = $oneError['message'];
+            if (isset($oneError->message)) {
+                $errorsToSet[] = $oneError->message;
             }
         }
         $response->setError($errorsToSet);

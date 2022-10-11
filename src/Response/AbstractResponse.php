@@ -106,7 +106,7 @@ abstract class AbstractResponse implements ResponseInterface, JsonSerializable
      */
     public function setBody($body)
     {
-        $jsonBody = json_decode($body, true);
+        $jsonBody = json_decode($body);
         $this->body = $jsonBody;
 
         return $this;
