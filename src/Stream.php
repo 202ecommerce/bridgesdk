@@ -234,9 +234,9 @@ class Stream implements StreamInterface
      * @param int $offset
      * @param int $whence
      *
-     * @throws RuntimeException
-     *
      * @return void
+     *
+     * @throws RuntimeException
      */
     public function seek($offset, $whence = SEEK_SET)
     {
@@ -274,9 +274,9 @@ class Stream implements StreamInterface
     /**
      * @param string $string
      *
-     * @throws RuntimeException
-     *
      * @return false|int
+     *
+     * @throws RuntimeException
      */
     public function write($string)
     {
@@ -314,9 +314,9 @@ class Stream implements StreamInterface
     /**
      * @param int $length
      *
-     * @throws RuntimeException
-     *
      * @return false|string
+     *
+     * @throws RuntimeException
      */
     public function read($length)
     {
