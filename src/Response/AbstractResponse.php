@@ -47,6 +47,9 @@ abstract class AbstractResponse implements ResponseInterface, JsonSerializable
     /** @var string */
     private $reasonPhrase = '';
 
+    /** @var string[] */
+    private $error = [];
+
     /** @var int */
     private $statusCode;
 
@@ -85,11 +88,13 @@ abstract class AbstractResponse implements ResponseInterface, JsonSerializable
     /**
      * Gets the body of the message.
      *
-     * @return null|StreamInterface returns the body as a stream
+     * @param mixed $returnStream
+     *
+     * @return null|AbstractModel|StreamInterface returns the body as a stream
      */
-    public function getBody()
+    public function getBody($returnStream = true)
     {
-        return $this->stream;
+        return true === $returnStream ? $this->stream : $this->body;
     }
 
     /**
@@ -101,7 +106,7 @@ abstract class AbstractResponse implements ResponseInterface, JsonSerializable
      */
     public function setBody($body)
     {
-        $jsonBody = json_decode($body, true);
+        $jsonBody = json_decode($body);
         $this->body = $jsonBody;
 
         return $this;
@@ -121,6 +126,30 @@ abstract class AbstractResponse implements ResponseInterface, JsonSerializable
     public function getReasonPhrase()
     {
         return $this->reasonPhrase;
+    }
+
+    /**
+     * @inherit
+     *
+     * @return mixed
+     */
+    public function getError()
+    {
+        return $this->error;
+    }
+
+    /**
+     * @inherit
+     *
+     * @param mixed $errors
+     *
+     * @return self
+     */
+    public function setError($errors)
+    {
+        $this->error = $errors;
+
+        return $this;
     }
 
     /**

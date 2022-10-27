@@ -106,8 +106,8 @@ class CreatePaymentRequestIntegrationTest extends IntegrationTestCase
     {
         return (new CreatePayment())
             ->setBankId(6)
-            ->setSuccessfulCallbackUrl('http://prestashop171.denys.tot/?success')
-            ->setUnsuccessfulCallbackUrl('http://prestashop171.denys.tot/?error')
+            ->setSuccessfulCallbackUrl('https://prestashop178.denys.tot/?success')
+            ->setUnsuccessfulCallbackUrl('https://prestashop178.denys.tot/?error')
             ->setTransactions([
                 (new CreatePaymentTransaction())
                     ->setCurrency('EUR')
@@ -120,7 +120,6 @@ class CreatePaymentRequestIntegrationTest extends IntegrationTestCase
                 (new PaymentUser())
                     ->setFirstName('Unit')
                     ->setLastName('Test')
-                    ->setExternalReference('unit_test')
                     ->setIpAddress('192.168.1.1')
             );
     }
