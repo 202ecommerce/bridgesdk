@@ -86,7 +86,6 @@ class ListBanks extends AbstractModel
         if (true === empty($url)) {
             return '';
         }
-
         $paramsString = explode('?', $url);
         $allParams = explode('&', $paramsString[1]);
         foreach ($allParams as $aParam) {
