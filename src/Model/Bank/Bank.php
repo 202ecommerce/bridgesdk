@@ -41,21 +41,6 @@ class Bank extends AbstractModel
     protected $logoUrl;
 
     /**
-     * @var null|bool
-     */
-    protected $isHighlighted;
-
-    /**
-     * @var ?string
-     */
-    protected $primaryColor;
-
-    /**
-     * @var ?string
-     */
-    protected $secondaryColor;
-
-    /**
      * @var ?string
      */
     protected $parentName;
@@ -63,22 +48,7 @@ class Bank extends AbstractModel
     /**
      * @var array<string>
      */
-    protected $capabilities = [];
-
-    /**
-     * @var array<array>
-     */
-    protected $form = [];
-
-    /**
-     * @var array<string>
-     */
-    protected $channelType = [];
-
-    /**
-     * @var ?int
-     */
-    protected $displayOrder;
+    protected $environments = [];
 
     /**
      * @return int
@@ -185,84 +155,6 @@ class Bank extends AbstractModel
     }
 
     /**
-     * @return null|bool
-     */
-    public function isHighlighted()
-    {
-        return $this->isHighlighted;
-    }
-
-    /**
-     * @param null|bool $isHighlighted
-     *
-     * @return Bank
-     */
-    public function setIsHighlighted($isHighlighted)
-    {
-        if (true === \is_bool($isHighlighted) || null === $isHighlighted) {
-            $this->isHighlighted = $isHighlighted;
-
-            return $this;
-        }
-
-        throw new InvalidArgumentException(
-            'Is highlighted must be a string or null, '.\gettype($isHighlighted).' is given.'
-        );
-    }
-
-    /**
-     * @return null|string
-     */
-    public function getPrimaryColor()
-    {
-        return $this->primaryColor;
-    }
-
-    /**
-     * @param null|string $primaryColor
-     *
-     * @return Bank
-     */
-    public function setPrimaryColor($primaryColor)
-    {
-        if (true === \is_string($primaryColor) || null === $primaryColor) {
-            $this->primaryColor = $primaryColor;
-
-            return $this;
-        }
-
-        throw new InvalidArgumentException(
-            'Primary color must be a string or null, '.\gettype($primaryColor).' is given.'
-        );
-    }
-
-    /**
-     * @return null|string
-     */
-    public function getSecondaryColor()
-    {
-        return $this->secondaryColor;
-    }
-
-    /**
-     * @param null|string $secondaryColor
-     *
-     * @return Bank
-     */
-    public function setSecondaryColor($secondaryColor)
-    {
-        if (true === \is_string($secondaryColor) || null === $secondaryColor) {
-            $this->secondaryColor = $secondaryColor;
-
-            return $this;
-        }
-
-        throw new InvalidArgumentException(
-            'Secondary color must be a string or null, '.\gettype($secondaryColor).' is given.'
-        );
-    }
-
-    /**
      * @return null|string
      */
     public function getParentName()
@@ -291,104 +183,26 @@ class Bank extends AbstractModel
     /**
      * @return array<string>
      */
-    public function getCapabilities()
+    public function getEnvironments()
     {
-        return $this->capabilities;
+        return $this->environments;
     }
 
     /**
-     * @param array<string> $capabilities
+     * @param array<string> $environments
      *
      * @return Bank
      */
-    public function setCapabilities($capabilities)
+    public function setEnvironments($environments)
     {
-        if (true === \is_array($capabilities)) {
-            $this->capabilities = $capabilities;
+        if (true === \is_array($environments)) {
+            $this->environments = $environments;
 
             return $this;
         }
 
         throw new InvalidArgumentException(
-            'Capabilities must be an array, '.\gettype($capabilities).' is given.'
-        );
-    }
-
-    /**
-     * @return array<array>
-     */
-    public function getForm()
-    {
-        return $this->form;
-    }
-
-    /**
-     * @param array<array> $form
-     *
-     * @return Bank
-     */
-    public function setForm($form)
-    {
-        if (true === \is_array($form)) {
-            $this->form = $form;
-
-            return $this;
-        }
-
-        throw new InvalidArgumentException(
-            'Form must be an array, '.\gettype($form).' is given.'
-        );
-    }
-
-    /**
-     * @return array<string>
-     */
-    public function getChannelType()
-    {
-        return $this->channelType;
-    }
-
-    /**
-     * @param array<string> $channelType
-     *
-     * @return Bank
-     */
-    public function setChannelType($channelType)
-    {
-        if (true === \is_array($channelType)) {
-            $this->channelType = $channelType;
-
-            return $this;
-        }
-
-        throw new InvalidArgumentException(
-            'Channel type must be an array, '.\gettype($channelType).' is given.'
-        );
-    }
-
-    /**
-     * @return null|int
-     */
-    public function getDisplayOrder()
-    {
-        return $this->displayOrder;
-    }
-
-    /**
-     * @param null|int $displayOrder
-     *
-     * @return Bank
-     */
-    public function setDisplayOrder($displayOrder)
-    {
-        if (true === \is_int($displayOrder) || null === $displayOrder) {
-            $this->displayOrder = $displayOrder;
-
-            return $this;
-        }
-
-        throw new InvalidArgumentException(
-            'Display order must be an int or null, '.\gettype($displayOrder).' is given.'
+            'Environments must be an array, '.\gettype($environments).' is given.'
         );
     }
 }

@@ -22,7 +22,7 @@ use InvalidArgumentException;
 
 class BankRequest extends AbstractRequest
 {
-    protected $requestTarget = '/banks/:idBank';
+    protected $requestTarget = '/providers/:providerId';
 
     protected $method = 'GET';
 
@@ -34,7 +34,7 @@ class BankRequest extends AbstractRequest
     public function setModel(AbstractModel $body)
     {
         if ($body instanceof Bank) {
-            $this->uri = $this->uri->withPath(str_replace(':idBank', (string) $body->getId(), $this->uri->getPath()));
+            $this->uri = $this->uri->withPath(str_replace(':providerId', (string) $body->getId(), $this->uri->getPath()));
 
             return parent::setModel($body);
         }

@@ -33,6 +33,21 @@ class PaymentUser extends AbstractModel
     /**
      * @var string
      */
+    protected $companyName;
+
+    /**
+     * @var string
+     */
+    protected $email;
+
+    /**
+     * @var string
+     */
+    protected $externalReference;
+
+    /**
+     * @var string
+     */
     private $ipAddress;
 
     /**
@@ -81,6 +96,77 @@ class PaymentUser extends AbstractModel
         }
 
         throw new InvalidArgumentException('Last name must be a string '.\gettype($lastName).' is given.');
+    }
+
+    /**
+     * @return string
+     */
+    public function getCompanyName(): string
+    {
+        return $this->companyName;
+    }
+
+    /**
+     * @param string $companyName
+     *
+     * @return PaymentUser
+     */
+    public function setCompanyName(string $companyName): PaymentUser
+    {
+        if (true === \is_string($companyName)) {
+            $this->companyName = $companyName;
+
+            return $this;
+        }
+
+        throw new InvalidArgumentException('Company name must be a string '.\gettype($companyName).' is given.');    }
+
+    /**
+     * @return string
+     */
+    public function getEmail(): string
+    {
+        return $this->email;
+    }
+
+    /**
+     * @param string $email
+     *
+     * @return PaymentUser
+     */
+    public function setEmail(string $email): PaymentUser
+    {
+        if (true === \is_string($email)) {
+            $this->email = $email;
+
+            return $this;
+        }
+
+        throw new InvalidArgumentException('Email must be a string '.\gettype($email).' is given.');
+    }
+
+    /**
+     * @return string
+     */
+    public function getExternalReference(): string
+    {
+        return $this->externalReference;
+    }
+
+    /**
+     * @param string $externalReference
+     *
+     * @return PaymentUser
+     */
+    public function setExternalReference(string $externalReference): PaymentUser
+    {
+        if (true === \is_string($externalReference)) {
+            $this->externalReference = $externalReference;
+
+            return $this;
+        }
+
+        throw new InvalidArgumentException('External reference must be a string '.\gettype($externalReference).' is given.');
     }
 
     /**

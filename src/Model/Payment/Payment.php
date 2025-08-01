@@ -39,7 +39,7 @@ class Payment extends AbstractModel
     /**
      * @var int
      */
-    private $bankId;
+    private $providerId;
 
     /**
      * @var string
@@ -130,26 +130,26 @@ class Payment extends AbstractModel
     /**
      * @return int
      */
-    public function getBankId()
+    public function getProviderId()
     {
-        return $this->bankId;
+        return $this->providerId;
     }
 
     /**
-     * @param int $bankId
+     * @param int $providerId
      *
      * @return Payment
      */
-    public function setBankId($bankId)
+    public function setProviderId($providerId)
     {
-        if (true === \is_int($bankId)) {
-            $this->bankId = $bankId;
+        if (true === \is_int($providerId)) {
+            $this->providerId = $providerId;
 
             return $this;
         }
 
         throw new InvalidArgumentException(
-            'Bank id must be an int '.\gettype($bankId).' is given.'
+            'Provider id must be an int '.\gettype($providerId).' is given.'
         );
     }
 

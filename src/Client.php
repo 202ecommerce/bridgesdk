@@ -72,7 +72,7 @@ class Client
     /**
      * @var string
      */
-    private $version = '2021-06-01';
+    private $version = '2025-01-15';
 
     /**
      * @var Stream
