@@ -46,6 +46,12 @@ class BankResponse extends AbstractResponse
             return (new Error())->hydrate($output);
         }
 
+        $output['logo_url'] = empty($output['images']) || empty($output['images']['logo']) ? '' : $output['images']['logo'];
+        $output['parent_name'] = empty($output['group_name']) ? '' : $output['group_name'];
+        if (isset($response['payment_metadata']['provider_environments'])) {
+            $output['environments'] = $output['payment_metadata']['provider_environments'];
+        }
+
         return (new Bank())->hydrate($output);
     }
 }

@@ -31,22 +31,22 @@ class PaymentUser extends AbstractModel
     private $lastName;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $companyName;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $email;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $externalReference;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $ipAddress;
 
@@ -99,9 +99,9 @@ class PaymentUser extends AbstractModel
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getCompanyName(): string
+    public function getCompanyName(): ?string
     {
         return $this->companyName;
     }
@@ -122,9 +122,9 @@ class PaymentUser extends AbstractModel
         throw new InvalidArgumentException('Company name must be a string '.\gettype($companyName).' is given.');    }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getEmail(): string
+    public function getEmail(): ?string
     {
         return $this->email;
     }
@@ -146,9 +146,9 @@ class PaymentUser extends AbstractModel
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getExternalReference(): string
+    public function getExternalReference(): ?string
     {
         return $this->externalReference;
     }
@@ -170,9 +170,9 @@ class PaymentUser extends AbstractModel
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getIpAddress()
+    public function getIpAddress(): ?string
     {
         return $this->ipAddress;
     }
@@ -182,7 +182,7 @@ class PaymentUser extends AbstractModel
      *
      * @return PaymentUser
      */
-    public function setIpAddress($ipAddress)
+    public function setIpAddress(string $ipAddress)
     {
         if (true === \is_string($ipAddress)) {
             $this->ipAddress = $ipAddress;
