@@ -3,7 +3,7 @@ on: [push]
 jobs:
     # Check there is no syntax errors in the project
     php-linter:
-        name: PHP Syntax check 5.6|7.4|8.1
+        name: PHP Syntax check 7.4|8.1
         runs-on: ubuntu-latest
         steps:
             - name: Checkout
