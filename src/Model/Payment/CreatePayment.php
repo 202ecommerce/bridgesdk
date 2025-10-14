@@ -23,17 +23,12 @@ class CreatePayment extends AbstractModel
     /**
      * @var string
      */
-    private $successfulCallbackUrl;
-
-    /**
-     * @var string
-     */
-    private $unsuccessfulCallbackUrl;
+    private $callbackUrl;
 
     /**
      * @var int
      */
-    private $bankId;
+    private $providerId;
 
     /**
      * @var array<CreatePaymentTransaction>
@@ -48,78 +43,52 @@ class CreatePayment extends AbstractModel
     /**
      * @return string
      */
-    public function getSuccessfulCallbackUrl()
+    public function getCallbackUrl()
     {
-        return $this->successfulCallbackUrl;
+        return $this->callbackUrl;
     }
 
     /**
-     * @param string $successfulCallbackUrl
+     * @param string $callbackUrl
      *
      * @return CreatePayment
      */
-    public function setSuccessfulCallbackUrl($successfulCallbackUrl)
+    public function setCallbackUrl($callbackUrl)
     {
-        if (true === \is_string($successfulCallbackUrl)) {
-            $this->successfulCallbackUrl = $successfulCallbackUrl;
+        if (true === \is_string($callbackUrl)) {
+            $this->callbackUrl = $callbackUrl;
 
             return $this;
         }
 
         throw new InvalidArgumentException(
-            'Successful callback url must be a string '.\gettype($successfulCallbackUrl).' is given.'
-        );
-    }
-
-    /**
-     * @return string
-     */
-    public function getUnsuccessfulCallbackUrl()
-    {
-        return $this->unsuccessfulCallbackUrl;
-    }
-
-    /**
-     * @param string $unsuccessfulCallbackUrl
-     *
-     * @return CreatePayment
-     */
-    public function setUnsuccessfulCallbackUrl($unsuccessfulCallbackUrl)
-    {
-        if (true === \is_string($unsuccessfulCallbackUrl)) {
-            $this->unsuccessfulCallbackUrl = $unsuccessfulCallbackUrl;
-
-            return $this;
-        }
-
-        throw new InvalidArgumentException(
-            'Unsuccessful callback url must be a string '.\gettype($unsuccessfulCallbackUrl).' is given.'
+            'Callback url must be a string '.\gettype($callbackUrl).' is given.'
         );
     }
 
     /**
      * @return int
      */
-    public function getBankId()
+    public function getProviderId()
     {
-        return $this->bankId;
+        return $this->providerId;
     }
 
     /**
-     * @param int $bankId
+     * @param int $providerId
      *
      * @return CreatePayment
      */
-    public function setBankId($bankId)
+    public function setProviderId($providerId)
     {
-        if (true === \is_int($bankId)) {
-            $this->bankId = $bankId;
+        if (true === \is_int($providerId)) {
+            $this->providerId = $providerId;
 
             return $this;
         }
 
         throw new InvalidArgumentException(
-            'Bank id must be an int '.\gettype($bankId).' is given.'
+            'Provider id must be an int '.\gettype($providerId).' is given.'
         );
     }
 

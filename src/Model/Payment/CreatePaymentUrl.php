@@ -28,7 +28,7 @@ class CreatePaymentUrl extends AbstractModel
     /**
      * @var string
      */
-    private $consentUrl;
+    private $url;
 
     /**
      * @return string
@@ -59,26 +59,26 @@ class CreatePaymentUrl extends AbstractModel
     /**
      * @return string
      */
-    public function getConsentUrl()
+    public function getUrl()
     {
-        return $this->consentUrl;
+        return $this->url;
     }
 
     /**
-     * @param string $consentUrl
+     * @param string $url
      *
      * @return CreatePaymentUrl
      */
-    public function setConsentUrl($consentUrl)
+    public function setUrl($url)
     {
-        if (true === \is_string($consentUrl)) {
-            $this->consentUrl = $consentUrl;
+        if (true === \is_string($url)) {
+            $this->url = $url;
 
             return $this;
         }
 
         throw new InvalidArgumentException(
-            'Consent url must be a string '.\gettype($consentUrl).' is given.'
+            'Consent url must be a string '.\gettype($url).' is given.'
         );
     }
 }

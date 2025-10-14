@@ -23,7 +23,7 @@ class ListBanksRequest extends AbstractRequest
     /**
      * @var string
      */
-    protected $requestTarget = '/banks';
+    protected $requestTarget = '/providers';
 
     /**
      * @var string

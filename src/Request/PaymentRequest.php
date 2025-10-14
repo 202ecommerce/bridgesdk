@@ -22,7 +22,7 @@ use InvalidArgumentException;
 
 class PaymentRequest extends AbstractRequest
 {
-    protected $requestTarget = '/payment-requests/:idPayment';
+    protected $requestTarget = '/payment/payment-requests/:idPayment';
 
     protected $method = 'GET';
 

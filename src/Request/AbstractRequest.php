@@ -52,7 +52,7 @@ abstract class AbstractRequest implements RequestInterface, JsonSerializable
     public function __construct(array $headers = [], $version = '1.1', $query = [])
     {
         $this->uri = new ApiUri();
-        $this->uri = $this->uri->withPath('/v2'.$this->requestTarget);
+        $this->uri = $this->uri->withPath('/v3' . $this->requestTarget);
         $this->setQuery($query);
 
         if (!empty($this->getQuery())) {

@@ -31,7 +31,22 @@ class PaymentUser extends AbstractModel
     private $lastName;
 
     /**
-     * @var string
+     * @var string|null
+     */
+    protected $companyName;
+
+    /**
+     * @var string|null
+     */
+    protected $email;
+
+    /**
+     * @var string|null
+     */
+    protected $externalReference;
+
+    /**
+     * @var string|null
      */
     private $ipAddress;
 
@@ -84,9 +99,80 @@ class PaymentUser extends AbstractModel
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getIpAddress()
+    public function getCompanyName(): ?string
+    {
+        return $this->companyName;
+    }
+
+    /**
+     * @param string $companyName
+     *
+     * @return PaymentUser
+     */
+    public function setCompanyName(string $companyName): PaymentUser
+    {
+        if (true === \is_string($companyName)) {
+            $this->companyName = $companyName;
+
+            return $this;
+        }
+
+        throw new InvalidArgumentException('Company name must be a string '.\gettype($companyName).' is given.');    }
+
+    /**
+     * @return string|null
+     */
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    /**
+     * @param string $email
+     *
+     * @return PaymentUser
+     */
+    public function setEmail(string $email): PaymentUser
+    {
+        if (true === \is_string($email)) {
+            $this->email = $email;
+
+            return $this;
+        }
+
+        throw new InvalidArgumentException('Email must be a string '.\gettype($email).' is given.');
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getExternalReference(): ?string
+    {
+        return $this->externalReference;
+    }
+
+    /**
+     * @param string $externalReference
+     *
+     * @return PaymentUser
+     */
+    public function setExternalReference(string $externalReference): PaymentUser
+    {
+        if (true === \is_string($externalReference)) {
+            $this->externalReference = $externalReference;
+
+            return $this;
+        }
+
+        throw new InvalidArgumentException('External reference must be a string '.\gettype($externalReference).' is given.');
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getIpAddress(): ?string
     {
         return $this->ipAddress;
     }
@@ -96,7 +182,7 @@ class PaymentUser extends AbstractModel
      *
      * @return PaymentUser
      */
-    public function setIpAddress($ipAddress)
+    public function setIpAddress(string $ipAddress)
     {
         if (true === \is_string($ipAddress)) {
             $this->ipAddress = $ipAddress;
