@@ -20,12 +20,12 @@ use InvalidArgumentException;
 /**
  * Response Builder.
  *
- * Build a PSR-7 Response object
+ * Build a Response object
  */
 class ResponseBuilder
 {
     /**
-     * PSR-7 Response.
+     * Response.
      *
      * @var AbstractResponse
      */
@@ -119,7 +119,7 @@ class ResponseBuilder
     }
 
     /**
-     * Set reponse status.
+     * Set response status.
      *
      * @param string $statusLine Response status line string
      *

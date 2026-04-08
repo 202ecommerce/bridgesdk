@@ -15,42 +15,42 @@
 
 namespace BridgeSDK\Exception;
 
+use BridgeSDK\Request\AbstractRequest;
 use Exception;
-use Psr\Http\Message\RequestInterface;
 use RuntimeException;
 
 /**
- * Request Exception.
+ * Request Exception
  *
  * Failed http request exception class
  */
 class RequestException extends RuntimeException
 {
     /**
-     * Request object.
+     * Request object
      *
-     * @var RequestInterface
+     * @var AbstractRequest
      */
     private $request;
 
     /**
-     * Create request exception object.
+     * Create request exception object
      *
-     * @param string           $message       Exception message
-     * @param RequestInterface $request       Request object
-     * @param null|\Exception  $lastException Previous exception object
+     * @param string  $message  Exception message
+     * @param AbstractRequest  $request  Request object
+     * @param \Exception|null  $last_exception  Previous exception object
      */
-    public function __construct($message, RequestInterface $request, Exception $lastException = null)
+    public function __construct($message, AbstractRequest $request, ?Exception $last_exception)
     {
         $this->request = $request;
 
-        parent::__construct($message, 0, $lastException);
+        parent::__construct($message, 0, $last_exception);
     }
 
     /**
-     * Get the request object.
+     * Get the request object
      *
-     * @return RequestInterface
+     * @return AbstractRequest
      */
     public function getRequest()
     {

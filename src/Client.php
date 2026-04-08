@@ -23,8 +23,6 @@ use BridgeSDK\Response\ResponseBuilder;
 use BridgeSDK\Response\WebhookResponse;
 use InvalidArgumentException;
 use Logger\NullLogger;
-use Psr\Http\Message\RequestInterface;
-use Psr\Log\LoggerInterface;
 use RuntimeException;
 use UnexpectedValueException;
 
@@ -48,7 +46,7 @@ class Client
     protected $options;
 
     /**
-     * @var LoggerInterface
+     * @var mixed
      */
     protected $logger;
 
@@ -89,13 +87,16 @@ class Client
     }
 
     /**
-     * Send a PSR-7 Request.
+     * Send a Request
      *
-     * @return AbstractResponse
+     * @param AbstractRequest $request
+     * @param mixed $additionnalHeaders
      *
-     * @throws RequestException         Invalid request
+     * @return Response\AbstractResponse
+     *
+     * @throws RequestException Invalid request
      * @throws InvalidArgumentException Invalid header names and/or values
-     * @throws RuntimeException         Failure to create stream
+     * @throws RuntimeException Failure to create stream
      */
     public function sendRequest(AbstractRequest $request)
     {
@@ -217,7 +218,7 @@ class Client
     }
 
     /**
-     * @param LoggerInterface $logger
+     * @param mixed $logger
      *
      * @return Client
      */
@@ -261,14 +262,14 @@ class Client
     }
 
     /**
-     * Create array of headers to pass to CURLOPT_HTTPHEADER.
+     * Create array of headers to pass to CURLOPT_HTTPHEADER
      *
-     * @param RequestInterface $request Request object
-     * @param array<mixed>     $options cURL options
+     * @param AbstractRequest $request Request object
+     * @param array<mixed> $options cURL options
      *
      * @return array<mixed> Array of http header lines
      */
-    protected function createHeaders(RequestInterface $request, array $options)
+    protected function createHeaders(AbstractRequest $request, array $options)
     {
         $headers = [];
         $request_headers = $request->getHeaders();
@@ -303,15 +304,18 @@ class Client
     }
 
     /**
-     * Create cURL request options.
+     * Create cURL request options
+     *
+     * @param AbstractRequest $request
+     * @param ResponseBuilder $response
      *
      * @return array<mixed> cURL options
      *
-     * @throws RequestException         Invalid request
+     * @throws RequestException Invalid request
      * @throws InvalidArgumentException Invalid header names and/or values
-     * @throws RuntimeException         Unable to read request body
+     * @throws RuntimeException Unable to read request body
      */
-    protected function createOptions(RequestInterface $request, ResponseBuilder $response)
+    protected function createOptions(AbstractRequest $request, ResponseBuilder $response)
     {
         $options = $this->options;
 
@@ -363,14 +367,14 @@ class Client
     }
 
     /**
-     * Add cURL options related to the request body.
+     * Add cURL options related to the request body
      *
-     * @param RequestInterface $request Request object
-     * @param array<mixed>     $options cURL options
+     * @param AbstractRequest $request Request object
+     * @param array<mixed> $options cURL options
      *
      * @return mixed
      */
-    protected function addRequestBodyOptions(RequestInterface $request, array $options)
+    protected function addRequestBodyOptions(AbstractRequest $request, array $options)
     {
         /*
          * HTTP methods that cannot have payload:

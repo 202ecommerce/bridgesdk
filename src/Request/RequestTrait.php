@@ -15,8 +15,6 @@
 
 namespace BridgeSDK\Request;
 
-use Psr\Http\Message\UriInterface;
-
 /**
  * @internal should not be used outside of BridgeSDK as it does not fall under our BC promise
  */
@@ -28,7 +26,7 @@ trait RequestTrait
     /** @var null|string */
     protected $requestTarget;
 
-    /** @var UriInterface */
+    /** @var array|mixed|void|bool|null */
     protected $uri;
 
     public function getRequestTarget()
@@ -81,7 +79,7 @@ trait RequestTrait
         return $this->uri;
     }
 
-    public function withUri(UriInterface $uri, $preserveHost = false)
+    public function withUri($uri, $preserveHost = false)
     {
         if ($uri === $this->uri) {
             return $this;

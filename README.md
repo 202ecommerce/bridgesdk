@@ -12,7 +12,7 @@ This package is compatible with PHP 5.6+.
 
 ## How to install it ?
 
-Todo: Composer via packagist
+composer require 202ecommerce/bridge-sdk
 
 To use this package with php 5.6 or in production mode, please install this dependency with :
 
