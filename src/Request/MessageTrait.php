@@ -16,7 +16,6 @@
 namespace BridgeSDK\Request;
 
 use BridgeSDK\Stream;
-use Psr\Http\Message\StreamInterface;
 
 /**
  * Trait implementing functionality common to requests and responses.
@@ -38,7 +37,7 @@ trait MessageTrait
     /** @var string */
     protected $protocol = '1.1';
 
-    /** @var null|StreamInterface */
+    /** @var null|Stream */
     protected $stream;
 
     /**
@@ -184,7 +183,7 @@ trait MessageTrait
     /**
      * @inherit
      */
-    public function withBody(StreamInterface $body)
+    public function withBody(Stream $body)
     {
         if ($body === $this->stream) {
             return $this;

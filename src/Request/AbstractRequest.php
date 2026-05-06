@@ -19,12 +19,11 @@ use BridgeSDK\Model\AbstractModel;
 use BridgeSDK\Stream;
 use BridgeSDK\Uri\ApiUri;
 use JsonSerializable;
-use Psr\Http\Message\RequestInterface;
 
 /**
  * API client.
  */
-abstract class AbstractRequest implements RequestInterface, JsonSerializable
+abstract class AbstractRequest implements JsonSerializable
 {
     use MessageTrait;
     use RequestTrait;

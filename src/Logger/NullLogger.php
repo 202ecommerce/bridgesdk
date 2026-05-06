@@ -15,9 +15,7 @@
 
 namespace Logger;
 
-use Psr\Log\LoggerInterface;
-
-class NullLogger implements LoggerInterface
+class NullLogger
 {
     public function emergency($message, array $context = [])
     {
